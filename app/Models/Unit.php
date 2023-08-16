@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 class Unit extends Model
 {
     use HasFactory;
-    protected $fillable=['unit_id','name','description','course_id','year','semester','is_active'];
+    protected $fillable=['name','description','course_id','year','semester','is_active'];
     /**
      * course
-     * @return HasMany
+     * @return BelongsTo
      */
     public function course(): BelongsTo
     {
-        return $this->hasMany(Course::class);
+        return $this->belongsTo(Course::class);
     }
 }

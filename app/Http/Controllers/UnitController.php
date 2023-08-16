@@ -22,8 +22,8 @@ class UnitController extends Controller
      */
     public function create()
     {
-        $course = Course::all();
-        return view('units.create',compact('course'));
+        $courses = Course::all();
+        return view('units.create',compact('courses'));
     }
 
     /**
@@ -34,18 +34,17 @@ class UnitController extends Controller
         $request -> validate([
             'name' =>'required',
             'description' =>'required',
+            'course_id'=>'required',
+            'year'=>'required',
+            'semester'=>'required'
         ]);
-        $unit = Unit::create([
+        Unit::create([
             "name" => $request->name,
-            "description" => $request->description
+            "description" => $request->description,
+            "course_id"=>$request->course_id,
+            "year"=> $request->year ,
+            "semester"=>  $request->semester
         ]);
-        foreach($request ->course as $course)
-        {
-            Course::create([
-                "unit_id" => $unit->id,
-                "course_id" => $course,
-            ]);
-        }
         return redirect()->route('units.index')->with('success','unit added successfully');
     }
 
@@ -88,15 +87,7 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        $unit = Unit::query()->where('is_active',true)->first();
-        if ($unit)
-        {
-            $unit -> update(['is_active'== false]);
-        }
-        else
-        {
-            abort(403,'Unit not found');
-        }
+        $unit = Unit::query()->where('id',$unit->id)->update(['is_active'=>false]);
         return back();
     }
 }
