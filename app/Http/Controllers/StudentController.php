@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\Course;
-use App\Models\Department;
 use Illuminate\Http\Request;
-
+use Carbon;
 class StudentController extends Controller
 {
     /**
@@ -14,7 +13,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::orderBy('id','asc')->paginate(10);
+        $students = Student::query()->where('is_active', true)->get();
         return view('students.index',compact('students'));
     }
     /**
@@ -36,6 +35,8 @@ class StudentController extends Controller
             'email'=>'required',
             'phone_number'=>'required',
             'date_of_birth'=>'required',
+            'course_id'=>'required',
+            'admission_year'=>'required'
         ]);
         if($request->file('photo'))
         {
@@ -47,20 +48,17 @@ class StudentController extends Controller
         {
             echo "Please select file";
         }
-        $student = Student::create([
+        $date = date('Y', time());
+        Student::create([
             "name"=>$request->name,
             "photo"=>$filename,
             "email"=>$request->email,
             "phone_number"=>$request->phone_number,
             "date_of_birth"=>$request->date_of_birth,
+            "course_id"=>$request->course_id,
+            "admission_year"=>$date
         ]);
-        foreach($request->course as $course)
-        {
-            Course::create([
-                "course_id"=>$course,
-                "student_id"=>$student->id,
-            ]);
-        }
+        
         return redirect()->route('students.index')->with('success','Student added successfully');
     }
     /**
@@ -118,15 +116,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        $student = Student::query()->where('is_active',true)->first();
-        if ($student)
-        {
-            $student -> update(['is_active'== false]);
-        }
-        else
-        {
-            abort(403,'Student not found');
-        }
+        $student = Student::query()->where('id',$student->id)->update(['is_active'=> false]);
         return back();
     }
 }

@@ -10,7 +10,7 @@
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Add new department</h4>
+                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Add new course</h4>
                 </div>
               </div>
               @if ($errors->any())
@@ -24,10 +24,19 @@
               @endif
               <div class="card-body">
                     <div class="container fluid">
-                        Add new department:
-                        <form action="{{ route('departments.store') }}" method="POST" role="form" class="text-start" enctype="multipart/form-data">
+                        Add new Course:
+                        <form action="{{ route('courses.store') }}" method="POST" role="form" class="text-start" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
+                            <div class="input-group input-group-outline my-3">
+                                <strong>Course Id:</strong>
+                                <input type="text" name="course_id" id="course_id" class="form-control" required>
+                                @error('course_id')
+                                <div class="alert alert-danger mt-1 mb-1">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>   
                             <div class="input-group input-group-outline my-3">
                                 <strong>Name:</strong>
                                 <input type="text" name="name" id="name" class="form-control" required>
@@ -47,16 +56,16 @@
                                 @enderror
                             </div>
                             <div class="input-group input-group-outline my-3">
-                                <strong>Head:</strong>
-                                <input type="text" name="department_head" id="department_head" class="form-control" placeholder="user@example.com">
-                                @error('department_head')
+                                <strong>Number:</strong>
+                                <input type="text" name="number" id="number" class="form-control" placeholder="user@example.com">
+                                @error('number')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
                                 </div>
                                 @enderror
                             </div>
                             <div class="input-group input-group-outline my-3">
-                                <strong>Statute:</strong>
+                                <strong>Description:</strong>
                                 <input type="text" name="description" id="description" class="form-control" placeholder="user@example.com" required>
                                 @error('description')
                                 <div class="alert alert-danger mt-1 mb-1">
@@ -64,7 +73,44 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div>
+                            <div class="input-group input-group-outline my-3">
+                                <strong>Duration:</strong>
+                                <input type="text" name="duration" id="duration" class="form-control" placeholder="user@example.com" required>
+                                @error('duration')
+                                <div class="alert alert-danger mt-1 mb-1">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="input-group">
+                              <label for="">Department</label><br>
+                              <select class="form-select" data-placeholder="Select a State..." style="width:50%" name="department_id">
+                                    @foreach($departments as $department)
+                                    <option value="{{$department->id }}">{{$department->name}}</option>
+                                    @endforeach
+                               </select>
+                               @error('department')
+                               <div class="alert alert-danger mt-1 mb-1">
+                                    {{ $message }}
+                               </div>
+                               @enderror
+                            </div>
+                            <br>
+                            <div class="input-group">
+                              <label for="">Category</label><br>
+                              <select class="form-select" data-placeholder="Select a State..." style="width:50%" name="category_id">
+                                    @foreach($categories as $category)
+                                    <option value="{{$category->id }}">{{$category->name}}</option>
+                                    @endforeach
+                               </select>
+                               @error('category')
+                               <div class="alert alert-danger mt-1 mb-1">
+                                    {{ $message }}
+                               </div>
+                               @enderror
+                            </div>
+                            <br>
+                            <div class="justify-content center">
                               <button type="submit" class="btn btn-primary ml-3">Submit</button>
                             </div>
                           </div>

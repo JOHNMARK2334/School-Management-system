@@ -41,7 +41,7 @@ Route::put('/students/update/{student}',[StudentController::class,'update'])->na
 Route::get('/students/edit/{id}',[StudentController::class,'edit'])->name('students.edit');
 Route::get('/students/show/{id}',[StudentController::class,'show'])->name('students.show');
 Route::post('/students/store',[StudentController::class, 'store'])->name('students.store');
-Route::get('/students/delete/{student}',[StudentController::class, 'destroy'])->name('students.destroy');
+Route::get('/students/delete/{student}',[StudentController::class, 'destroy'])->name('students.delete');
 //units
 Route::get('/units',[UnitController::class,'index'])->name('units.index');
 Route::get('/units/create',[UnitController::class,'create'])->name('units.create');
@@ -49,7 +49,7 @@ Route::put('/units/update/{unit}',[UnitController::class,'update'])->name('units
 Route::get('/units/edit/{id}',[UnitController::class,'edit'])->name('units.edit');
 Route::get('/units/show/{id}',[UnitController::class,'show'])->name('units.show');
 Route::post('/units/store',[UnitController::class, 'store'])->name('units.store');
-Route::get('/units/delete/{unit}',[UnitController::class, 'destroy'])->name('units.destroy');
+Route::get('/units/delete/{unit}',[UnitController::class, 'destroy'])->name('units.delete');
 //departments
 Route::get('/departments',[DepartmentController::class,'index'])->name('departments.index');
 Route::get('/departments/create',[DepartmentController::class,'create'])->name('departments.create');
@@ -64,7 +64,7 @@ Route::get('/staff/create',[StaffController::class,'create'])->name('staff.creat
 Route::put('/staff/update/{staff}',[StaffController::class,'update'])->name('staff.update');
 Route::get('/staff/edit/{id}',[StaffController::class,'edit'])->name('staff.edit');
 Route::get('/staff/show/{id}',[StaffController::class,'show'])->name('staff.show');
-Route::post('/staff/store',[StaffController::class, 'store'])->name('staff.store');
+Route::post('/staff/create',[StaffController::class, 'store'])->name('staff.store');
 Route::get('/staff/delete/{staff}',[StaffController::class, 'destroy'])->name('staff.delete');
 //courses
 Route::get('/courses',[CourseController::class,'index'])->name('courses.index');
@@ -72,8 +72,8 @@ Route::get('/courses/create',[CourseController::class,'create'])->name('courses.
 Route::put('/courses/update/{course}',[CourseController::class,'update'])->name('courses.update');
 Route::get('/courses/edit/{id}',[CourseController::class,'edit'])->name('courses.edit');
 Route::get('/courses/show/{id}',[CourseController::class,'show'])->name('courses.show');
-Route::post('/courses/store',[CourseController::class, 'store'])->name('courses.store');
-Route::get('/courses/delete/{course}',[CourseController::class, 'destroy'])->name('courses.destroy');
+Route::post('/courses/create',[CourseController::class, 'store'])->name('courses.store');
+Route::get('/courses/delete/{course}',[CourseController::class, 'destroy'])->name('courses.delete');
 //roles
 Route::get('/roles',[RoleController::class,'index'])->name('roles.index');
 Route::get('/roles/create',[RoleController::class,'create'])->name('roles.create');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Department;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -13,7 +14,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::orderBy('id','asc')->paginate(10);
+        $courses = Course::query()->where('is_active', true)->get();
         return view('courses.index',compact('courses'));
     }
 
@@ -22,8 +23,9 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $categories= Category::all();
         $departments = Department::all();
-        return view('courses.create',compact('departments'));
+        return view('courses.create',compact('departments','categories'));
     }
 
     /**
@@ -38,23 +40,20 @@ class CourseController extends Controller
             'number'=>'required',
             'description'=>'required',
             'duration'=>'required',
+            'department_id'=>'required',
+            'category_id'=>'required'
         ]);
-        $course = Course::create([
+        Course::create([
             "course_id"=>$request->course_id,
             "name"=>$request->name,
             "short_name"=>$request->short_name,
             "number"=>$request->number,
             "description"=> $request->description,
-            "duration"=> $request->duration
+            "duration"=> $request->duration,
+            "department_id"=>$request->department_id,
+            "category_id"=>$request->category_id
         ]);
-        foreach($request->department as $department)
-        {
-            Department::create([
-                "course_id"=>$course->id,
-                "department_id"=>$department,
-            ]);
-        }
-        return view('courses.index')->with('success','course created successfully');
+        return redirect()->route('courses.index')->with('success','course created successfully');
     }
 
     /**
@@ -104,15 +103,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        $course = Course::query()->where('is_active', true)->first();
-        if($course)
-        {
-            $course -> update(['is_active' == false]);
-        }
-        else
-        {
-            abort (403,'Course not found');
-        }
+        $course = Course::query()->where('id', $course->id)->update(['is_active'=>false]);
         return back() ;
     }
 }

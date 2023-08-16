@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('date_of_birth');
             $table->string('course_id');
-            $table->string('department_id');
             $table->string('admission_year');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

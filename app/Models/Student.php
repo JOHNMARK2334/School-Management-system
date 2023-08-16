@@ -10,21 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','photo','email','phone_number','date_of_birth','course_id','department_id','admission_year','is_active'];
+    protected $fillable = ['name','photo','email','phone_number','date_of_birth','course_id','admission_year','is_active'];
     /**
      * course
      * @return BelongsTo
      */
     public function course(): BelongsTo
     {
-        return $this->belongsTo(Course::all);
-    }
-    /**
-     * department
-     * @return BelongsTo
-     */
-    public function department(): BelongsTo
-    {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Course::class);
     }
 }

@@ -30,12 +30,4 @@ class Department extends Model
         return $this->hasMany(Course::class);
     }
     
-    /**
-     * student
-     * @return HasMany
-     */
-    public function student(): HasMany
-    {
-        return $this->hasMany(Student::class);
-    }
 }

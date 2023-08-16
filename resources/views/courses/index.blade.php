@@ -250,21 +250,21 @@
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"> Short Name</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">number</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duration</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
                         <th class="text-secondary opacity-7" col-span="3">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($courses as $course)
+                    @foreach ($courses  as $course)
                     <tr>
                         <td>{{$course->id}}</td>
                         <td>{{ $course->name}}</td>
                         <td>{{ $course->short_name}}</td>
                         <td>{{ $course->number}}</td>
                         <td>{{$course->duration}}</td>
-                        <td>{{ $course->description }}</td>
+                        <td>{{ $course->category->name }}</td>
                         <td>
-                            <a href="{{ route('course.show',$course->id) }}" class="btn btn-success">View</a>
+                            <a href="{{ route('courses.show',$course->id) }}" class="btn btn-success">View</a>
                             <a href="{{route('courses.edit',$course->id) }}" class="btn btn-info">Edit</a>
                             <a href ="{{ route('courses.delete',$course->id) }}" class="btn btn-warning">Delete</a>
                         </td>
