@@ -30,6 +30,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
+            'student_id'=>'',
             'name' =>'required',
             'photo'=>'required',
             'email'=>'required',
@@ -49,7 +50,11 @@ class StudentController extends Controller
             echo "Please select file";
         }
         $date = date('Y', time());
-        Student::create([
+        //generate student id
+        $cse = Course:: query()->where('course_id',$request->course_id)->first();
+        $student_id= IdGenerator::generate(['table' => 'students', 'field'=>'student_id','length'=>'17','prefix'=>$cse->course_id.'-'],$reset = false);
+        $create= Student::create([
+            "student_id"=>$student_id,
             "name"=>$request->name,
             "photo"=>$filename,
             "email"=>$request->email,
@@ -57,6 +62,11 @@ class StudentController extends Controller
             "date_of_birth"=>$request->date_of_birth,
             "course_id"=>$request->course_id,
             "admission_year"=>$date
+        ]);
+        $id= Student::query()->where('id',$create->id)->first();
+        $student_id= IdGenerator::generate(['table' => 'students', 'field'=>'student_id','length'=>'17','prefix'=>$cse->course_id.'-'.$id.'/'.$date],$reset = false);
+        Student::query()->where('id',$id)->update([
+            'student_id'=>$student_id,
         ]);
         
         return redirect()->route('students.index')->with('success','Student added successfully');

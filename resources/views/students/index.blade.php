@@ -257,13 +257,12 @@
                   <tbody>
                     @foreach ($students as $student)
                     <tr>
-                      <td>{{$student->id}}</td>
+                      <td>{{$student->student_id}}</td>
                       <td><img src="{{ asset('public/Image/'.$student->photo)}}" class="rounded-circle" width="60px" height="60px" alt=""/></td>
                       <td>{{$student->name}}</td>
                       <td>{{$student->email}}</td>
-                      <td>{{$student->course->name}}</td>
+                      <td>{{\App\Models\Course::query()->where('course_id',$student->course_id)->first()->name}}</td>
                       <td>{{$student->admission_year}}</td>
-                      <td>
                       <td>
                         <a href="{{ route('students.show',$student->id) }}" class="btn btn-success">View</a>
                         <a href="{{route('students.edit',$student->id) }}" class="btn btn-info">Edit</a>

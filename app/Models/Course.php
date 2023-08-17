@@ -37,7 +37,7 @@ class Course extends Model
      */
     public function student(): HasMany
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class, 'course_id')->latest();
     }
 
     /**
