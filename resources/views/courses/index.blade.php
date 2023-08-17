@@ -257,7 +257,7 @@
                   <tbody>
                     @foreach ($courses  as $course)
                     <tr>
-                        <td>{{$course->id}}</td>
+                        <td>{{$course->course_id}}</td>
                         <td>{{ $course->name}}</td>
                         <td>{{ $course->short_name}}</td>
                         <td>{{ $course->number}}</td>

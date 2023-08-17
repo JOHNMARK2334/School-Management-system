@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Role;
 use App\Models\Staff;
 use App\Models\Department;

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Student;
 use App\Models\Course;
 use Illuminate\Http\Request;

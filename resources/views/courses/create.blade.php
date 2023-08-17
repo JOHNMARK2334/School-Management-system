@@ -30,7 +30,7 @@
                             <div class="row">
                             <div class="input-group input-group-outline my-3">
                                 <strong>Course Id:</strong>
-                                <input type="text" name="course_id" id="course_id" class="form-control" required>
+                                <input type="text" name="course_id" id="course_id" class="form-control" hidden>
                                 @error('course_id')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}

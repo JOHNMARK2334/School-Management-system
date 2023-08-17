@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Course;
 use App\Models\Department;
 use App\Models\Category;
@@ -34,7 +34,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
-            'course_id'=>'required',
+            'course_id'=>'',
             'name' =>'required',
             'short_name'=>'required',
             'number'=>'required',
@@ -43,8 +43,21 @@ class CourseController extends Controller
             'department_id'=>'required',
             'category_id'=>'required'
         ]);
+        //generate course id
+        $dept=Department::query()->where('id', $request->department_id)->first();
+        $course_id= IdGenerator::generate(['table' => 'courses', 'field'=>'course_id','length'=>'6','prefix'=>$dept->short_name.'-'.$request->number.'-'],$reset = false);
+        // if($dept){
+        //     $prefix=$dept['code'];
+        //     }else{$prefix='0';}
+        //     $generator = IdGenerator::make(['table' => 'courses',  'field' => 'course_id', 'length' =>1
+        //     2, 'prefix'=>$prefix]);
+        //     try {
+        //         $courseId = $generator->generate();
+        //         } catch (Exception $e) {
+        //             dd("Error: " . $e);
+        //             };
         Course::create([
-            "course_id"=>$request->course_id,
+            "course_id"=>$course_id,
             "name"=>$request->name,
             "short_name"=>$request->short_name,
             "number"=>$request->number,
@@ -55,7 +68,6 @@ class CourseController extends Controller
         ]);
         return redirect()->route('courses.index')->with('success','course created successfully');
     }
-
     /**
      * Display the specified resource.
      */
