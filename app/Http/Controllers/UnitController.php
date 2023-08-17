@@ -23,7 +23,7 @@ class UnitController extends Controller
     public function create()
     {
         $courses = Course::all();
-        return view('units.create',compact('courses'));
+        return view('units.create', compact('courses'));
     }
 
     /**
@@ -32,13 +32,18 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
+            'unit_id'=>'',
             'name' =>'required',
             'description' =>'required',
             'course_id'=>'required',
             'year'=>'required',
             'semester'=>'required'
         ]);
+        //generate unit id
+        $cse= Course::query()->where('id',$request->course_id)->first();
+        $unit_id= IdGenerator::generate(['table' => 'units', 'field'=>'unit_id','length'=>'7','prefix'=>$cse->short_name.'-'.$request->year.$request->semester],$reset = false);
         Unit::create([
+            "unit_id"=>$unit_id,
             "name" => $request->name,
             "description" => $request->description,
             "course_id"=>$request->course_id,

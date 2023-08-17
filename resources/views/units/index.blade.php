@@ -257,7 +257,7 @@
                   <tbody>
                     @foreach ($units as $unit)
                     <tr>
-                      <td>{{$unit->id}}</td>
+                      <td>{{$unit->unit_id}}</td>
                       <td>{{$unit->name}}</td>
                       <td>{{$unit->description}}</td>
                       <td>{{$unit->course->name}}</td>

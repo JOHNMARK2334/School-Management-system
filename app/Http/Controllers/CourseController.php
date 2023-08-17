@@ -45,7 +45,7 @@ class CourseController extends Controller
         ]);
         //generate course id
         $dept=Department::query()->where('id', $request->department_id)->first();
-        $course_id= IdGenerator::generate(['table' => 'courses', 'field'=>'course_id','length'=>'6','prefix'=>$dept->short_name.'-'.$request->number.'-'],$reset = false);
+        $course_id= IdGenerator::generate(['table' => 'courses', 'field'=>'course_id','length'=>'7','prefix'=>$dept->short_name.'-'.$request->number],$reset = false);
         // if($dept){
         //     $prefix=$dept['code'];
         //     }else{$prefix='0';}

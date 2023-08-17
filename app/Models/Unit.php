@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unit extends Model
 {
     use HasFactory;
-    protected $fillable=['name','description','course_id','year','semester','is_active'];
+    protected $fillable=['unit_id','name','description','course_id','year','semester','is_active'];
     /**
      * course
      * @return BelongsTo

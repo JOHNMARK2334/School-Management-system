@@ -10,7 +10,7 @@
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Add new role</h4>
+                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Add new unit</h4>
                 </div>
               </div>
               @if ($errors->any())
@@ -47,7 +47,7 @@
                                 @enderror
                             </div>
                             <div class="input-group">
-                              <label for="">Course</label><br>
+                              <strong>Course:</strong><br>
                               <select class="form-select" data-placeholder="Select a State..." style="width:50%" name="course_id">
                                     @foreach($courses as $course)
                                     <option value="{{$course->id }}">{{$course->name}}</option>
