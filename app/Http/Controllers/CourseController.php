@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Course;
+use App\Models\Unit;
 use App\Models\Department;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -14,8 +15,9 @@ class CourseController extends Controller
      */
     public function index()
     {
+        $unit= Unit::get();
         $courses = Course::query()->where('is_active', true)->get();
-        return view('courses.index',compact('courses'));
+        return view('courses.index',compact('courses','unit'));
     }
 
     /**
