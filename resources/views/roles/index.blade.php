@@ -255,7 +255,7 @@
                   <tbody>
                     @foreach ($roles as $role)
                     <tr>
-                        <td>{{$role->id}}</td>
+                        <td>{{$role->role_id}}</td>
                         <td>{{ $role->name}}</td>
                         <td>{{ $role->description}}</td>
                         <td>{{ $role->department->name }}</td>

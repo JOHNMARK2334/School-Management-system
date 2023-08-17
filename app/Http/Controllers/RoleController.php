@@ -15,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::query()->where('is_active',true)->paginate(10);
-        return view('courses.index',compact('roles'));
+        return view('roles.index',compact('roles'));
     }
 
     /**
@@ -34,12 +34,19 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
-            'name' =>['required'],//.$request->input("id"),
+            'role_id'=>[''],
+            'name' =>['required'],
+            'short_name'=>['required'],//.$request->input("id"),
             'description'=>['required'],
             'department_id'=>[''],
         ]);
+        //generate id
+        $role_id= IdGenerator::generate(['table'=>'roles','field'=>'role_id','length'=>'7','prefix'=>$request->department_id.'-'.$request->short_name]);
+
         $role = Role::create([
+            "role_id"=>$role_id,
             "name" => $request->name,
+            "short_name"=>$request->short_name,
             "description" =>  $request->description,
             "department_id" => $request -> department_id,
         ]);

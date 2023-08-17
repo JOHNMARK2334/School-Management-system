@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description','department_id','is_active'];
+    protected $fillable = ['role_id','name','short_name', 'description','department_id','is_active'];
     /**
      * staff
      * @return BelongsTo
@@ -19,5 +19,13 @@ class Role extends Model
     public function staff(): BelongsTo
     {
         return $this->belongsTo(Staff::class);
+    }
+    /**
+     * role
+     * @return BelongsTo
+     */
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
     }
 }

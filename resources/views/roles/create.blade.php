@@ -38,6 +38,15 @@
                                 @enderror
                             </div>
                             <div class="input-group input-group-outline my-3">
+                                <strong>Ref Name:</strong>
+                                <input type="text" name="short_name" id="short_name" class="form-control" required>
+                                @error('short_name')
+                                <div class="alert alert-danger mt-1 mb-1">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="input-group input-group-outline my-3">
                                 <strong>Descripion:</strong>
                                 <input type="text" name="description" id="description" class="form-control" required>
                                 @error('description')
