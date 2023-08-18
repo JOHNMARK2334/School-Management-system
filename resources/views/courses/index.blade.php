@@ -282,9 +282,9 @@
                         <td>{{$course->duration}}</td>
                         <td>{{ $course->category->name }}</td>
                         <td>
-                            <a href="{{ route('courses.show',$course->id) }}" class="btn btn-success">View</a>
-                            <a href="{{route('courses.edit',$course->id) }}" class="btn btn-info">Edit</a>
-                            <a href ="{{ route('courses.delete',$course->id) }}" class="btn btn-warning">Delete</a>
+                          <a href="{{ route('courses.show',$course->id) }}" class="btn btn-success">View</a>
+                          <a href="{{route('courses.edit',$course->id) }}" class="btn btn-info">Edit</a>
+                          <a href ="{{ route('courses.delete',$course->id) }}" class="btn btn-warning">Delete</a>
                         </td>
                         <td></td>
                     </tr>
