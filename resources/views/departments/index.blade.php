@@ -265,7 +265,6 @@
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"> Short Name</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Department head</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
                         <th class="text-secondary opacity-7" col-span="3">Actions</th>
                     </tr>
                   </thead>
@@ -276,7 +275,6 @@
                         <td>{{ $department->name}}</td>
                         <td>{{ $department->short_name}}</td>
                         <td>{{ $department->department_head }}</td>
-                        <td>{{ $department->description }}</td>
                         <td>
                             <a href="{{ route('departments.show',$department->id) }}" class="btn btn-success">View</a>
                             <a href="{{route('departments.edit',$department->id) }}" class="btn btn-info">Edit</a>
