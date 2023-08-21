@@ -88,21 +88,21 @@
                               <!-- Department Dropdown -->
                               <strong>Department:</strong> 
                               <select id='sel_depart' name='sel_depart'>
-       <option value='0'>-- Select department --</option>
- 
-       <!-- Read Departments -->
-       @foreach($departmentData['data'] as $department)
-         <option value='{{ $department->id }}'>{{ $department->name }}</option>
-       @endforeach
-
-    </select>
+                                <option value='0'>-- Select department --</option>
+                                <!-- Read Departments -->
+                                @foreach($departmentData['data'] as $department)
+                                <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                @endforeach
+                              </select>
                               <br><br>
                               <!-- Department Employees Dropdown -->
                               <strong>Role:</strong> 
-                              <<select id='sel_emp' name='sel_emp'>
-       <option value='0'>-- Select Employee --</option>
-    </select><br><br><br>
-                              
+                              <select id='sel_emp' name='sel_emp'>
+                                <option value='0'>-- Select Employee --</option>
+                                @foreach($roles as $role)
+                                <option value='{{ $role->id }}'>{{$role->name}}</option>
+                                @endforeach
+                              </select><br><br><br>                     
                             </div>
                             <div class="justify-content center">
                               <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Submit</button>

@@ -22,13 +22,15 @@ class StaffController extends Controller
      */
     public function create()
     {
+        $roles=Role::all();
+        $departments=Department::all();
             // Fetch departments
             $departmentData['data'] = Department::orderby("name","asc")
             ->select('id','name')
             ->get();
 
-// Load index view
-return view('staff.create')->with("departmentData",$departmentData);
+        // Load index view
+       return view('staff.create',compact('roles','departments'))->with("departmentData",$departmentData);
     }
     // Fetch records
     public function getEmployees($id){
@@ -37,9 +39,7 @@ return view('staff.create')->with("departmentData",$departmentData);
         			->select('id','name')
         			->where('department_id',$id)
         			->get();
-  
         return response()->json($empData);
-     
     }
     /**
      * Store a newly created resource in storage.
