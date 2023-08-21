@@ -93,8 +93,9 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request)
     {
+        
         $request -> validate([
             'name' =>'required',
             'photo'=>'required',
@@ -104,6 +105,7 @@ class StudentController extends Controller
             'course_id'=>'required',
             'admission_year'=>'required'
         ]);
+        
         if($request->file('photo'))
         {
             $file= $request->file('photo');
@@ -114,14 +116,15 @@ class StudentController extends Controller
         {
             $filename=$student['photo'];
         }
-        $student= Student::query()->where('id',$student->id)->update([
-            "name"=>$request-> name,
-            "photo"=> $filename,
-            "email" =>$request-> email,
-            "phone_number"=>$request-> phone_number,
-            "date_of__birth"=>$request-> date_of_birth,
-            "course_id"=>$request-> course_id,
-            "admission_year"=>$request-> admission_year
+
+        Student::query()->where('id',$request->id)->update([
+            'name'=>$request->name,
+            'photo'=> $filename,
+            'email' =>$request->email,
+            'phone_number'=>$request->phone_number,
+            'date_of_birth'=>$request->date_of_birth,
+            'course_id'=>$request->course_id,
+            'admission_year'=>$request->admission_year
         ]);
         return redirect()->route('students.index')->with('success','Student details updated successfully');
     }

@@ -139,10 +139,11 @@
               <div class="card-body">
                     <div class="container fluid">
                         Edit student details:
-                        <form action="{{ route('students.update',  $students->id) }}" method="POST" role="form" class="text-start" enctype="multipart/form-data">
+                        <form action="{{ route('students.update') }}" method="POST" role="form" class="text-start" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
+                            <input type="text" name="id" id="id" class="form-control" value="{{$students->id}}" hidden>
                             <div class="input-group input-group-outline my-3">
                                 <strong>Name:</strong>
                                 <input type="text" name="name" id="name" class="form-control" value="{{$students->name}}" required>
@@ -155,8 +156,8 @@
                             <div class="input-group input-group-outline my-3">
                                 <strong>Photo:</strong>
                                 <?php if($students['photo']!= ''):?>
-                                    <img width="60px" height="60px" class="rounded" src="{{asset('public/Image/'.$students->photo) }}">
-                                    <input type="file" name="photo" value="{{ $students->photo }}" class="form-control" required>
+                                    <img width="60px" height="60px" class="rounded" src="{{asset('public/Image/'.$students->photo) }}"/><br>
+                                    <input type="file" name="photo" value="{{ $students->photo }}" class="form-control" required/>
                                 <?php endif;?>
                                 @error('photo')
                                 <div class="alert alert-danger mt-1 mb-1">

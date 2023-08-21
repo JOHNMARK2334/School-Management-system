@@ -90,7 +90,7 @@
                             </div>
                             <div class="input-group input-group-outline my-3">
                                 <strong>Admission year:</strong>
-                                <input type="date" name="admission_year" id="admission_year" class="form-control" placeholder="user@example.com" required>
+                                <input type="number" name="admission_year" id="admission_year" class="form-control" placeholder="user@example.com" required>
                                 @error('admission_year')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
