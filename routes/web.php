@@ -37,7 +37,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 //students
 Route::get('/students',[StudentController::class,'index'])->name('students.index');
 Route::get('/students/create',[StudentController::class,'create'])->name('students.create');
-Route::put('/students/update/{student}',[StudentController::class,'update'])->name('students.update');
+Route::put('/students/update/{id}',[StudentController::class,'update'])->name('students.update');
 Route::get('/students/edit/{id}',[StudentController::class,'edit'])->name('students.edit');
 Route::get('/students/show/{id}',[StudentController::class,'show'])->name('students.show');
 Route::post('/students/store',[StudentController::class, 'store'])->name('students.store');

@@ -85,8 +85,9 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $students = Student::query()->where('id',$id)->first();
-        return view('students.edit',compact('students'));
+        $courses = Course::get();
+        $students= Student::query()->where('id',$id)->first();
+        return view('students.edit',compact('students','courses'));
     }
 
     /**
@@ -100,6 +101,8 @@ class StudentController extends Controller
             'email'=>'required',
             'phone_number'=>'required',
             'date_of_birth'=>'required',
+            'course_id'=>'required',
+            'admission_year'=>'required'
         ]);
         if($request->file('photo'))
         {
@@ -111,12 +114,14 @@ class StudentController extends Controller
         {
             $filename=$student['photo'];
         }
-        Student::query()->where('id',$student->id)->update([
+        $student= Student::query()->where('id',$student->id)->update([
             "name"=>$request-> name,
             "photo"=> $filename,
             "email" =>$request-> email,
             "phone_number"=>$request-> phone_number,
             "date_of__birth"=>$request-> date_of_birth,
+            "course_id"=>$request-> course_id,
+            "admission_year"=>$request-> admission_year
         ]);
         return redirect()->route('students.index')->with('success','Student details updated successfully');
     }
