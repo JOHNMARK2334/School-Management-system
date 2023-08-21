@@ -84,30 +84,34 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
+        $departments = Department::all();
+        $categories = Category::all();
         $courses = Course::query()->where('id',$id)->first();
-        return view('courses.edit',compact('courses'));
+        return view('courses.edit',compact('courses','departments','categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request)
     {
         $request -> validate([
-            'course_id'=>'required',
             'name' =>'required|string|max:255',
             'short_name'=>'required',
             'number'=>'required',
             'duration'=>'required',
             'description'=>'required',
+            'department_id'=>'required',
+            'category_id'=>'required'
         ]);
-        Course::query()->where('id',$course->id)->update([
-            'course_id'=>$request->course_id,
+        Course::query()->where('id',$request->id)->update([
             'name'=>$request->name,
             'short_name'=>$request->short_name,
             'number'=>$request->number,
             'duration'=> $request->duration,
             'description'=>$request->description,
+            'department_id'=>$request->department_id,
+            'category_id'=>$request->category_id
         ]); 
         return redirect()->route('courses.index')->with('success','course details updated successfully');
     }

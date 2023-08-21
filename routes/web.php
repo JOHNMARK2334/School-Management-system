@@ -69,7 +69,7 @@ Route::get('/staff/delete/{staff}',[StaffController::class, 'destroy'])->name('s
 //courses
 Route::get('/courses',[CourseController::class,'index'])->name('courses.index');
 Route::get('/courses/create',[CourseController::class,'create'])->name('courses.create');
-Route::put('/courses/update/{course}',[CourseController::class,'update'])->name('courses.update');
+Route::put('/courses/update',[CourseController::class,'update'])->name('courses.update');
 Route::get('/courses/edit/{id}',[CourseController::class,'edit'])->name('courses.edit');
 Route::get('/courses/show/{id}',[CourseController::class,'show'])->name('courses.show');
 Route::post('/courses/create',[CourseController::class, 'store'])->name('courses.store');
