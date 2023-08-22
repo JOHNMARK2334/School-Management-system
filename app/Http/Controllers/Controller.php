@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\Staff;
 use App\Models\Category;
 use App\Models\Department;
+use App\Charts\SampleChart;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -39,13 +40,18 @@ class Controller extends BaseController
     }
     public function dashboard()
     {
+        $chart= new SampleChart;
+        $chart->labels(['One', 'Two', 'Three', 'Four']);
+        $chart->dataset('My dataset', 'bar', [1, 2, 3, 4]);
+        $chart->dataset('My dataset 2', 'bar', [4, 3, 2, 1]);
+
         $categories= Category::get();
         $departments = Department::get();
         $students = Student::get();
         //dd($students);
         $staff = Staff::get();
         $student = Student::query()->where('admission_year', 2023)->get();
-        return view('pages.dashboard',compact('students','staff','student','departments','categories'));
+        return view('pages.dashboard',compact('students','staff','student','departments','categories','chart'));
         return view('pages.dashboard');
     }
 

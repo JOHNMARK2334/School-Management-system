@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
-
 return [
 
     /*
@@ -159,7 +158,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
         /*
          * Application Service Providers...
          */
