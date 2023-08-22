@@ -75,24 +75,22 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request)
     {
         $request -> validate([
             'name' =>'required',
             'short_name'  => 'required',
-            'dept_head' => 'required',
             'description' => 'required',
         ]);
-        $department = Department::query()->where('id',$department->id)->update([
+        $department = Department::query()->where('id',$request->id)->update([
             'name'=>$request->name,
             'short_name'=>$request->short_name,
-            'dept_head'=> $request->dept_head,
             'description'=>$request->description,
         ]);
         if ($department)
         {
             session(['success'=>'updated']);
-            return redirect('departments.index');
+            return redirect()->route('departments.index');
         }
         else
         {
