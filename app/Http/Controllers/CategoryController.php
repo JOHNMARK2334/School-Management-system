@@ -12,8 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $courses= Courses::get();
         $categories = Category::orderBy('id','asc')->paginate(5);
-        return view('categories.index',compact('categories'));
+        return view('categories.index',compact('categories','courses'));
     }
 
     /**
@@ -61,14 +62,14 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
         $request -> validate([
             'name' => 'required',
             'description' => 'required',
         ]);
         //dd("update");
-        Category::query()->where('id',$category->id)-update([
+        Category::query()->where('id',$request->id)-update([
             "name"=>$request->name,
             "description"=> $request->description,
         ]);
@@ -80,15 +81,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category = Category::query()->where('is_active',true)->first();
-        if ($category)
-        {
-            $category -> update(['is_active'== false]);
-        }
-        else
-        {
-            echo"error 401 Unit not found";
-        }
+        $category = Category::query()->where('id',$category->id)->update(['is_active'=>false]);
         return back();
     }
 }

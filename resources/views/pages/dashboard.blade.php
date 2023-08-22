@@ -722,6 +722,51 @@
           </div>
         </div>
       </div>
+      <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Categories Table</h6>
+                    <div style="position:absolute; right:0;">
+                        <a class="btn btn-secondary" href="{{ route('categories.create') }}">Add new category</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>  
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Courses</th>
+                        <th class="text-secondary opacity-7" col-span="3">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($categories  as $category)
+                    <tr>
+                        <td>{{$category->id}}</td>
+                        <td>{{ $category->name}}</td>
+                        <td>{{count($category->course) }}</td>
+                        <td>
+                          <a href="{{ route('categories.show',$category->id) }}" class="btn btn-success">View</a>
+                          <a href="{{route('categories.edit',$category->id) }}" class="btn btn-info">Edit</a>
+                          <a href ="{{ route('categories.delete',$category->id) }}" class="btn btn-warning">Delete</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                    @endforeach
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -754,6 +799,7 @@
           </div>
         </div>
       </footer>
+    </div>
     </div>
   </main>
   <div class="fixed-plugin">

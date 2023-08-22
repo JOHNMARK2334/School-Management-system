@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Staff;
+use App\Models\Category;
 use App\Models\Department;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -38,12 +39,13 @@ class Controller extends BaseController
     }
     public function dashboard()
     {
+        $categories= Category::get();
         $departments = Department::get();
         $students = Student::get();
         //dd($students);
         $staff = Staff::get();
         $student = Student::query()->where('admission_year', 2023)->get();
-        return view('pages.dashboard',compact('students','staff','student','departments'));
+        return view('pages.dashboard',compact('students','staff','student','departments','categories'));
         return view('pages.dashboard');
     }
 

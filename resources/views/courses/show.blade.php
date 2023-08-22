@@ -253,7 +253,7 @@
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-                Unit name:{{$courses->name}}
+                Course name:{{$courses->name}}
               </h5>
             </div>
           </div>
