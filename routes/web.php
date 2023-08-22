@@ -45,7 +45,7 @@ Route::get('/students/delete/{student}',[StudentController::class, 'destroy'])->
 //units
 Route::get('/units',[UnitController::class,'index'])->name('units.index');
 Route::get('/units/create',[UnitController::class,'create'])->name('units.create');
-Route::put('/units/update/{unit}',[UnitController::class,'update'])->name('units.update');
+Route::put('/units/update',[UnitController::class,'update'])->name('units.update');
 Route::get('/units/edit/{id}',[UnitController::class,'edit'])->name('units.edit');
 Route::get('/units/show/{id}',[UnitController::class,'show'])->name('units.show');
 Route::post('/units/store',[UnitController::class, 'store'])->name('units.store');

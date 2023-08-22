@@ -138,7 +138,7 @@
               @endif
               <div class="card-body">
                     <div class="container fluid">
-                        Edit student details:
+                        Edit staff details:
                         <form action="{{ route('students.update') }}" method="POST" role="form" class="text-start" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -193,7 +193,7 @@
                                 @enderror
                             </div>
                             <div class="input-group">
-                              <strong>Department</strong>
+                              <strong>Department:</strong>
                               <select class="form-select" data-placeholder="Select a department" style="width:50%" name="department_id" value="{{\App\Models\Department::query()->where('id',$staff->department_id)->first()->name}}">
                                     @foreach($departments as $department)
                                     <option value="{{$department->id }}">{{$department->name}}</option>
@@ -206,7 +206,7 @@
                                @enderror
                             </div>
                             <div class="input-group">
-                              <strong>Role</strong>
+                              <strong>Role:</strong>
                               <select class="form-select" data-placeholder="Select a role" style="width:50%" name="role_id" value="{{\App\Models\Role::query()->where('id',$staff->role_id)->first()->name}}">
                                     @foreach($roles as $role)
                                     <option value="{{$role->id }}">{{$role->name}}</option>

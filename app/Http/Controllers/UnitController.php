@@ -67,22 +67,29 @@ class UnitController extends Controller
      */
     public function edit($id)
     {
+        $courses= Course::all();
         $units = Unit::query()->where('id',$id)->first();
-        return view('units.edit',compact('units'));
+        return view('units.edit',compact('units','courses'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Unit $unit)
+    public function update(Request $request)
     {
         $request -> validate([
-            'name' => 'required',
-            'description' => 'required',
+            'name' =>'required',
+            'description' =>'required',
+            'course_id'=>'required',
+            'year'=>'required',
+            'semester'=>'required'
         ]);
-        $unit = Unit::query()->where('id',$unit->id)->update([
+        Unit::query()->where('id',$request->id)->update([
             "name" => $request->name,
-            "description" => $request->description
+            "description" => $request->description,
+            "course_id"=>$request->course_id,
+            "year"=> $request->year ,
+            "semester"=>  $request->semester
         ]);
         return redirect()->route('units.index')->with('success','unit details updated successfully');
     }
