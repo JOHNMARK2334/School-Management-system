@@ -42,8 +42,7 @@ class Controller extends BaseController
     {
         $chart= new SampleChart;
         $chart->labels(['One', 'Two', 'Three', 'Four']);
-        $chart->dataset('My dataset', 'bar', [1, 2, 3, 4]);
-        $chart->dataset('My dataset 2', 'bar', [4, 3, 2, 1]);
+        $chart->dataset('My dataset', 'doughnut', [1, 2, 3, 4])->backgroundColor(collect(['#ff0000','#ff00ff','#0000ff','#ffff00']))->color(collect(['#ff0000','#ff00ff','#0000ff','#ffff00']));
 
         $categories= Category::get();
         $departments = Department::get();
