@@ -146,7 +146,7 @@
                             <input type="text" name="id" id="id" class="form-control" value="{{$students->id}}" hidden>
                             <div class="input-group input-group-outline my-3">
                                 <strong>Name:</strong>
-                                <input type="text" name="name" id="name" class="form-control" value="{{$students->name}}" required>
+                                <input type="text" name="name" id="name" class="form-control" value="{{$staff->name}}" required>
                                 @error('name')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
@@ -155,9 +155,9 @@
                             </div>
                             <div class="input-group input-group-outline my-3">
                                 <strong>Photo:</strong>
-                                <?php if($students['photo']!= ''):?>
-                                    <img width="60px" height="60px" class="rounded" src="{{asset('public/Image/'.$students->photo) }}"/><br>
-                                    <input type="file" name="photo" value="{{ $students->photo }}" class="form-control" required/>
+                                <?php if($staff['photo']!= ''):?>
+                                    <img width="60px" height="60px" class="rounded" src="{{asset('public/Image/'.$staff->photo) }}"/><br>
+                                    <input type="file" name="photo" value="{{ $staff->photo }}" class="form-control" required/>
                                 <?php endif;?>
                                 @error('photo')
                                 <div class="alert alert-danger mt-1 mb-1">
@@ -167,7 +167,7 @@
                             </div>
                             <div class="input-group input-group-outline my-3">
                                 <strong>Email:</strong>
-                                <input type="email" name="email" id="email" class="form-control" value="{{$students->email}}"required>
+                                <input type="email" name="email" id="email" class="form-control" value="{{$staff->email}}"required>
                                 @error('email')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
@@ -176,7 +176,7 @@
                             </div>
                             <div class="input-group input-group-outline my-3">
                                 <strong>Phone number:</strong>
-                                <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{$students->phone_number}}" required>
+                                <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{$staff->phone_number}}" required>
                                 @error('phone_number')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
@@ -184,35 +184,39 @@
                                 @enderror
                             </div>
                             <div class="input-group input-group-outline my-3">
-                                <strong>Date of birth:</strong>
-                                <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="{{$students->date_of_birth}}" required>
-                                @error('date_of_birth')
+                                <strong>Email:</strong>
+                                <input type="email" name="email" id="email" class="form-control" value="{{$staff->email}}" required>
+                                @error('email')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
                                 </div>
                                 @enderror
                             </div>
                             <div class="input-group">
-                              <strong>Course</strong>
-                              <select class="form-select" data-placeholder="Select a course.." style="width:50%" name="course_id" value="{{\App\Models\Course::query()->where('course_id',$students->course_id)->first()->name}}">
+                              <strong>Department</strong>
+                              <select class="form-select" data-placeholder="Select a department" style="width:50%" name="department_id" value="{{\App\Models\Department::query()->where('id',$staff->department_id)->first()->name}}">
                                     @foreach($departments as $department)
-                                    <option value="{{$course->course_id }}">{{$course->name}}</option>
+                                    <option value="{{$department->id }}">{{$department->name}}</option>
                                     @endforeach
                                </select>
-                               @error('course')
+                               @error('departments')
                                <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
                                </div>
                                @enderror
                             </div>
-                            <div class="input-group input-group-outline my-3">
-                                <strong>Admission year:</strong>
-                                <input type="number" name="admission_year" id="admission_year" class="form-control" value="{{$students->admission_year}}" required>
-                                @error('admission_year')
-                                <div class="alert alert-danger mt-1 mb-1">
+                            <div class="input-group">
+                              <strong>Role</strong>
+                              <select class="form-select" data-placeholder="Select a role" style="width:50%" name="role_id" value="{{\App\Models\Role::query()->where('id',$staff->role_id)->first()->name}}">
+                                    @foreach($roles as $role)
+                                    <option value="{{$role->id }}">{{$role->name}}</option>
+                                    @endforeach
+                               </select>
+                               @error('role')
+                               <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
-                                </div>
-                                @enderror
+                               </div>
+                               @enderror
                             </div>
                             <div class="justify-content center">
                               <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Submit</button>
