@@ -77,7 +77,7 @@ Route::get('/courses/delete/{course}',[CourseController::class, 'destroy'])->nam
 //roles
 Route::get('/roles',[RoleController::class,'index'])->name('roles.index');
 Route::get('/roles/create',[RoleController::class,'create'])->name('roles.create');
-Route::put('/roles/update/{role}',[RoleController::class,'update'])->name('roles.update');
+Route::put('/roles/update',[RoleController::class,'update'])->name('roles.update');
 Route::get('/roles/edit/{id}',[RoleController::class,'edit'])->name('roles.edit');
 Route::get('/roles/show/{id}',[RoleController::class,'show'])->name('roles.show');
 Route::post('/roles/store',[RoleController::class, 'store'])->name('roles.store');

@@ -67,24 +67,27 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        $departments= Department::all();
         $roles = Role::query()->where('id',$id)->first();
-        return view('roles.edit',compact('roles'));
+        return view('roles.edit',compact('roles','departments'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request)
     {
         $request -> validate([
-            'name' =>'required',  //.$request->input("id"),
+            'name' =>'required', 
+            'short_name'=>'required',//.$request->input("id") ,
             'description'=>'required',
             'department_id'=>'required',
         ]);
-        Role::query()->where('id',$role->id)->update([
+        Role::query()->where('id',$request->id)->update([
             'name'=>$request->name,
+            'short_name'=>$request->short_name,//.$request->input("id"),
             'description'=> $request->description,
-            'description'=>$request->department_id
+            'department_id'=>$request->department_id
         ]);
         return redirect()->route('roles.index')->with('success','role details updated successfully');
     }
