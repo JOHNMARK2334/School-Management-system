@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Student;
 use App\Http\Controllers\QrCodeController;
@@ -38,7 +39,8 @@ class StudentController extends Controller
             'phone_number'=>'required',
             'date_of_birth'=>'required',
             'course_id'=>'required',
-            'admission_year'=>'required'
+            'admission_year'=>'required',
+            'qrcode'=>''
         ]);
         if($request->file('photo'))
         {
@@ -49,6 +51,16 @@ class StudentController extends Controller
         else
         {
             echo "Please select file";
+        }
+        if($request->file('qrcode'))
+        {
+            echo "404 error";
+        }
+        else
+        {
+            $qrcode=QrCode::size(100)
+                        ->format('png')
+                        ->generate('', public_path('images/qrcode.png'));
         }
         $date = date('Y', time());
         //generate student id
@@ -62,14 +74,16 @@ class StudentController extends Controller
             "phone_number"=>$request->phone_number,
             "date_of_birth"=>$request->date_of_birth,
             "course_id"=>$request->course_id,
-            "admission_year"=>$date
+            "admission_year"=>$date,
+            "qrcode"=>$qrcode
         ]);
         $id= Student::query()->where('id',$create->id)->first();
         $student_id= IdGenerator::generate(['table' => 'students', 'field'=>'student_id','length'=>'17','prefix'=>$cse->course_id.'-'.$id.'/'.$date],$reset = false);
+        $qrcode = QrCode::size(100)->generate($create->id.''.$create->student_id.''.$create->name.''.$create->photo.''.$create->email.''.$create->phone_number.''.$create->date_of_birth.''.$create->course_id.''.$create->admission_year);            
         Student::query()->where('id',$id)->update([
             'student_id'=>$student_id,
-        ]);
-        
+            'qrcode'=>$qrcode
+        ]);    
         return redirect()->route('students.index')->with('success','Student added successfully');
     }
     /**
