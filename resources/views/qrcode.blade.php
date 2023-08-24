@@ -7,7 +7,9 @@
                 <h2>Simple QR Code</h2>
             </div>
             <div class="card-body">
-                {!! QrCode::size(300)->generate('https://github.com/JOHNMARK2334/School-Management-system') !!}
+                @foreach($students as $student)
+                {!! QrCode::size(300)->generate($student->student_id) !!}
+                @endforeach
             </div>
         </div>
         <div class="card">

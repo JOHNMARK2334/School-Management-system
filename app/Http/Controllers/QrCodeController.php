@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\StaffController;
+use App\Models\Student;
+use App\Models\Staff;
 
 class QrCodeController extends Controller
 {
