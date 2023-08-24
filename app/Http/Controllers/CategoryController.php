@@ -12,9 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $courses= Courses::get();
-        $categories = Category::orderBy('id','asc')->paginate(5);
-        return view('categories.index',compact('categories','courses'));
+        //$courses= Courses::get();
+        $categories = Category::get();
+        return view('categories.index',compact('categories'));
     }
 
     /**

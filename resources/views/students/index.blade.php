@@ -283,6 +283,7 @@
                         <a href="{{ route('students.show',$student->id) }}" class="btn btn-success">View</a>
                         <a href="{{route('students.edit',$student->id) }}" class="btn btn-info">Edit</a>
                         <a href ="{{ route('students.delete',$student->id) }}" class="btn btn-warning">Delete</a>
+                        <a href ="{{ route('qrCode',$student->id) }}" class="btn btn-warning">Generate QR</a>
                       </td>
                     </tr>
                     @endforeach

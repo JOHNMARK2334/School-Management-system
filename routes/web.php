@@ -106,5 +106,5 @@ Route::get('dashboard/',[Controller::class,'dashboard'])->name('pages.dashboard'
 Route::get('billing/')->name('pages.billing');
 Route::get('/', 'DepartmentController@index'); // localhost:8000/
 Route::post('/getEmployees/{id}',[StaffController::class,'getEmployees'])->name('get.roles');
-Route::get('/generate-qrcode', [QrCodeController::class, 'index']);
+Route::get('/generate-qrcode', [QrCodeController::class, 'index'])->name('qrCode');
 

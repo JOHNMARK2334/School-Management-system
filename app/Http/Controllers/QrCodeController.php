@@ -12,6 +12,6 @@ class QrCodeController extends Controller
     {
         $students= Student::all();
         $staff= Staff::all();
-        return view('qrcode',compact('students','staff'));
+        return view('qrCode',compact('students','staff'));
     }
 }

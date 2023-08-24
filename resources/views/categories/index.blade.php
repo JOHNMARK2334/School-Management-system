@@ -128,9 +128,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Courses</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Categories</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Courses</h6>
+          <h6 class="font-weight-bolder mb-0">Categories</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -252,7 +252,7 @@
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                     <h6 class="text-white text-capitalize ps-3">Categories Table</h6>
                     <div style="position:absolute; right:0;">
-                        <a class="btn btn-secondary" href="{{ route('categories.create') }}">Add new course</a>
+                        <a class="btn btn-secondary" href="{{ route('categories.create') }}">Add new categories</a>
                     </div>
                 </div>
             </div>

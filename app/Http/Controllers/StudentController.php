@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Student;
+use App\Http\Controllers\QrCodeController;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Carbon;
