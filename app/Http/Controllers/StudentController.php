@@ -40,7 +40,7 @@ class StudentController extends Controller
             'date_of_birth'=>'required',
             'course_id'=>'required',
             'admission_year'=>'required',
-            'qrcode'=>''
+            'qrcode'=>'null'
         ]);
         if($request->file('photo'))
         {
@@ -60,7 +60,7 @@ class StudentController extends Controller
         {
             $qrcode=QrCode::size(100)
                         ->format('png')
-                        ->generate('', public_path('public/Image/'));
+                        ->generate('qrcode', public_path('public/Image/qrcode.png'));
         }
         $date = date('Y', time());
         //generate student id

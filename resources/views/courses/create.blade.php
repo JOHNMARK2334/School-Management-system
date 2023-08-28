@@ -82,8 +82,8 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class="input-group">
-                              <label for="">Department</label><br>
+                            <div class="input-group input-group-outline  my-3">
+                              <label for="">Department:</label><br>
                               <select class="form-select" data-placeholder="Select a State..." style="width:50%" name="department_id">
                                     @foreach($departments as $department)
                                     <option value="{{$department->id }}">{{$department->name}}</option>
@@ -96,8 +96,8 @@
                                @enderror
                             </div>
                             <br>
-                            <div class="input-group">
-                              <label for="">Category</label><br>
+                            <div class="input-group input-group-outline my-3">
+                              <label for="">Category:</label><br>
                               <select class="form-select" data-placeholder="Select a State..." style="width:50%" name="category_id">
                                     @foreach($categories as $category)
                                     <option value="{{$category->id }}">{{$category->name}}</option>
