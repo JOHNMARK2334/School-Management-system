@@ -40,7 +40,6 @@ class StudentController extends Controller
             'date_of_birth'=>'required',
             'course_id'=>'required',
             'admission_year'=>'required',
-            'qrcode'=>'null'
         ]);
         if($request->file('photo'))
         {
@@ -52,16 +51,9 @@ class StudentController extends Controller
         {
             echo "Please select file";
         }
-        if($request->file('qrcode'))
-        {
-            echo "404 error";
-        }
-        else
-        {
-            $qrcode=QrCode::size(100)
-                        ->format('png')
-                        ->generate('qrcode', public_path('public/Image/qrcode.png'));
-        }
+        $qrcode=QrCode::size(100)
+                ->format('png')
+                ->generate('qrcode', public_path('public/Image/'.$request->name.'.png'));
         $date = date('Y', time());
         //generate student id
         $cse = Course:: query()->where('course_id',$request->course_id)->first();
@@ -79,7 +71,9 @@ class StudentController extends Controller
         ]);
         $id= Student::query()->where('id',$create->id)->first();
         $student_id= IdGenerator::generate(['table' => 'students', 'field'=>'student_id','length'=>'17','prefix'=>$cse->course_id.'-'.$id.'/'.$date],$reset = false);
-        $qrcode = QrCode::size(100)->generate($create->id.''.$create->student_id.''.$create->name.''.$create->photo.''.$create->email.''.$create->phone_number.''.$create->date_of_birth.''.$create->course_id.''.$create->admission_year);            
+        $qrcode = QrCode::size(100)
+                    ->format('png')
+                    ->generate($create->id.''.$create->student_id.''.$create->name.''.$create->photo.''.$create->email.''.$create->phone_number.''.$create->date_of_birth.''.$create->course_id.''.$create->admission_year,public_path('public/Image/'.$create->student_id.'.png'));            
         Student::query()->where('id',$id)->update([
             'student_id'=>$student_id,
             'qrcode'=>$qrcode
