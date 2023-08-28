@@ -51,13 +51,13 @@ class StudentController extends Controller
         {
             echo "Please select file";
         }
-        $qrcode=QrCode::size(100)
-                ->format('png')
-                ->generate('qrcode', public_path('public/Image/'.$request->name.'.png'));
+        //dd($request);
         $date = date('Y', time());
         //generate student id
         $cse = Course:: query()->where('course_id',$request->course_id)->first();
+        //dd($request);
         $student_id= IdGenerator::generate(['table' => 'students', 'field'=>'student_id','length'=>'17','prefix'=>$cse->course_id.'-'],$reset = false);
+        //dd($request);
         $create= Student::create([
             "student_id"=>$student_id,
             "name"=>$request->name,
@@ -67,17 +67,21 @@ class StudentController extends Controller
             "date_of_birth"=>$request->date_of_birth,
             "course_id"=>$request->course_id,
             "admission_year"=>$date,
-            "qrcode"=>$qrcode
         ]);
+        //dd($create);
         $id= Student::query()->where('id',$create->id)->first();
+        //dd($id);
         $student_id= IdGenerator::generate(['table' => 'students', 'field'=>'student_id','length'=>'17','prefix'=>$cse->course_id.'-'.$id.'/'.$date],$reset = false);
+        //dd($student_id);
         $qrcode = QrCode::size(100)
                     ->format('png')
-                    ->generate($create->id.''.$create->student_id.''.$create->name.''.$create->photo.''.$create->email.''.$create->phone_number.''.$create->date_of_birth.''.$create->course_id.''.$create->admission_year,public_path('public/Image/'.$create->student_id.'.png'));            
-        Student::query()->where('id',$id)->update([
+                    ->generate($create->id.''.$create->student_id.''.$create->name.''.$create->email.''.$create->phone_number.''.$create->date_of_birth.''.$create->course_id.''.$create->admission_year,public_path('public/Image/'.$create->student_id.'.png'));   
+        //dd($create);         
+        Student::query()->where('id',$id->id)->update([
             'student_id'=>$student_id,
             'qrcode'=>$qrcode
-        ]);    
+        ]);
+        //dd($request);    
         return redirect()->route('students.index')->with('success','Student added successfully');
     }
     /**
