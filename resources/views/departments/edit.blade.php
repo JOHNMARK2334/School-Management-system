@@ -164,7 +164,7 @@
                             </div>
                             <div class="input-group input-group-outline my-3">
                                 <strong>Description:</strong>
-                                <input type="text" name="description" id="description" class="form-control" value="{{$departments->description}}" required>
+                                <textarea class="form-control" rows="5" name="description" required>{{$departments->description}}</textarea>
                                 @error('description')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
