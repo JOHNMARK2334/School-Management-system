@@ -182,15 +182,15 @@
                             </div>
                             <div class="input-group input-group-outline my-3">
                                 <strong>Description:</strong>
-                                <input type="text" name="description" id="description" class="form-control" value="{{$courses->description}}" required></textarea>
+                                <textarea name="description"  class="form-control" rows="5" required>{{$courses->description}}</textarea>
                                 @error('description')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
                                 </div>
                                 @enderror
                             </div>
-                            <div class="input-group">
-                              <strong>Department</strong>
+                            <div class="input-group input-group-outline my-3">
+                              <strong>Department:</strong>
                               <select class="form-select" data-placeholder="Select a course.." style="width:50%" name="department_id" value="{{\App\Models\Department::query()->where('id',$courses->department_id)->first()->name}}">
                                     @foreach($departments as $department)
                                     <option value="{{$department->id }}">{{$department->name}}</option>
@@ -202,8 +202,8 @@
                                </div>
                                @enderror
                             </div>
-                            <div class="input-group">
-                              <strong>Category</strong>
+                            <div class="input-group input-group-outline my-3">
+                              <strong>Category:</strong>
                               <select class="form-select" data-placeholder="Select a course.." style="width:50%" name="category_id" value="{{\App\Models\Category::query()->where('id',$courses->category_id)->first()->name}}">
                                     @foreach($categories as $category)
                                     <option value="{{$category->id }}">{{$category->name}}</option>
