@@ -60,7 +60,7 @@ class StudentController extends Controller
         {
             $qrcode=QrCode::size(100)
                         ->format('png')
-                        ->generate('', public_path('images/qrcode.png'));
+                        ->generate('', public_path('public/Image/'));
         }
         $date = date('Y', time());
         //generate student id
