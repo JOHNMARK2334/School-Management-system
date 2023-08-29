@@ -2,64 +2,136 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mpesa;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Mpesa;
+use App\Models\User;
+use App\Models\Account;
+use App\Models\Revenue;
+use App\Models\Course;
+use App\Models\Student;
+use Note\Models\Notification;
+use App\Http\Controllers\SystemController;
+use LaravelMultipleGuards\Traits\FindGuard;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Jobs\MailJob;
 
-class MPesaController extends Controller
+class MpesaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * push
      */
-    public function index()
+    public function stkPush(Request $request)
     {
-        //
-    }
+        $response=  (new STKPush())->initiateSTK([
+            "CallingCode" => "254", // 254 or 255
+            "Secret" => env('PAM_APP_SHORTCODE_SECRET_KEY'),
+            "TransactionType" => "CustomerPayBillOnline", // CustomerPayBillOnline or CustomerBuyGoodsOnline
+            "PhoneNumber" => $this->phone,
+            'Amount' => ceil($this->course->amount),
+            "ResultUrl" => route('stk.push'),
+            "Description" => "Testing Payment"
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        if ($response->success) {
+            Mpesa::query()->create([
+                            'user_id' =>$this->user->id,
+                            'course_id' =>$this->course->id,
+                            'client_id' =>$this->course->client_id, 
+                            'reference_number' =>$response->data->ReferenceNumber,
+                            'phone_number' => $this->phone,
+                            'amount' => ceil($this->course->amount),
+                            'description'=>'Payments for Course'. $this->course->title,
+                            'attempts' => 1,
+                            'is_initiated' => true,
+                            'queued_at' => now()
+            ]);
+            Note::createSystemNotification(User::class, 'course', ' course Successfully Enrolled and awaiting for payments');
+            $this->emit('noteAdded');
+            $this->alert('success', 'Check Your Phone Number and Allow for Payment ');
+            $this->reset();
+            return redirect()->route('user.list_courses');
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        }
+        else{
+            $this->alert('error', implode(",\n", $response->data[0]->errors));
+        }
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Mpesa $mpesa)
+    public function cancelled()
     {
-        //
+        $this->alert('error', 'You have canceled.');
     }
-
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Mpesa $mpesa)
+     * Lipa na M-PESA password
+     * */
+    public function lipaNaMpesaCallBack(Request $request)
     {
-        //
-    }
+        // decode the data here from the mpesa payload response
+        $response = json_decode($request->getContent());
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Mpesa $mpesa)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Mpesa $mpesa)
-    {
-        //
+        SystemController::log([
+            $response
+        ], 'info', 'confirm_call_back');
+        //get the reference number if exists
+        $Mpesa = Mpesa::where('reference_number', $response->ReferenceNumber)->first();
+        if ($Mpesa) {
+            // update if request becomes true
+            if ($response->Success) {
+                // sync mpesa here
+                Mpesa::query()->where('reference_number', $response->ReferenceNumber)->update([
+                    'transaction_number' => $response->MpesaReceiptNumber,
+                    'is_paid' => true,
+                    'is_successful' => true,
+                    'payload' => $response,
+                    'callback_received_at' => now()
+                ]);
+                // write statements
+                Revenue::query()->updateOrCreate([
+                    'transaction_number' => $response->MpesaReceiptNumber,
+                ],                                         [
+                    'user_id' => $Mpesa->user_id,
+                    'client_id'=>$Mpesa->client_id,
+                    'transaction_type' => 'Order Payment',
+                    'reference_number' => $Mpesa->reference_number,
+                    'amount' => $response->Amount,
+                    'description' => $Mpesa->course_id . ' course payment.',
+                    'is_debit' => true
+                ]);
+                $wallet = Account::query()->where('client_id', $Mpesa->cliend_id)->first()->balance;
+                $balance = $wallet + $Mpesa->amount;
+                $wallet = Account::where('client_id', $Mpesa->cliend_id)->update(['balance' => $balance, 'available' => $balance]);
+                // grand Access to enrolledments statements
+                Enroll::query()
+                    ->create(
+                        [
+                            'course_id' => $Mpesa->course_id,
+                            'user_id' => $Mpesa->user_id,
+                            'client_id' =>$Mpesa->client_id, 
+                        ]
+                    );
+                // send notifications here 
+                dispatch((new MailJob(
+                    "Client" . " " . User::query()->where('id', $Mpesa->user_id)->first()->name,
+                    User::query()->where('id', $Mpesa->user_id)->first()->email,
+                    'Congratulatiuons!! You have been enroll a course',
+                    'course. #' . Course::query()->where('id',  $Mpesa->course_id)->first()->title . ' has been assigned to you Thank you for using our service',
+                    true,
+                    route('user.list_enroll_courses'),
+                    '<<< Visit here for more details >>>'
+                )))->onQueue('emails')->delay(2);
+                return redirect()->route('user.list_enroll_courses');
+            } else {
+                // sync mpesa here
+                $Mpesa->update([
+                    'transaction_number' => $response->MpesaReceiptNumber,
+                    'is_paid' => false,
+                    'is_successful' => true,
+                    'payload' => $response,
+                    'callback_received_at' => now()
+                ]);
+            }
+        }
     }
 }
