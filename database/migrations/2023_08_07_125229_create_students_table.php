@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('date_of_birth');
             $table->string('course_id');
             $table->string('admission_year');
-            $table->longText('qrcode')->nullable();
+            $table->string('qrcode')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

@@ -56,8 +56,7 @@ class StudentController extends Controller
         //generate student id
         $cse = Course:: query()->where('course_id',$request->course_id)->first();
         //dd($request);
-        $student_id= IdGenerator::generate(['table' => 'students', 'field'=>'student_id','length'=>'17','prefix'=>$cse->course_id.'-'],$reset = false);
-        //dd($request);
+        $student_id= IdGenerator::generate(['table' => 'students', 'field'=>'student_id','length'=>'13','prefix'=>$cse->course_id.'-'],$reset = true);
         $create= Student::create([
             "student_id"=>$student_id,
             "name"=>$request->name,
@@ -71,15 +70,16 @@ class StudentController extends Controller
         //dd($create);
         $id= Student::query()->where('id',$create->id)->first();
         //dd($id);
-        $student_id= IdGenerator::generate(['table' => 'students', 'field'=>'student_id','length'=>'17','prefix'=>$cse->course_id.'-'.$id.'/'.$date],$reset = false);
-        //dd($student_id);
+       
         $qrcode = QrCode::size(100)
                     ->format('png')
-                    ->generate($create->id.''.$create->student_id.''.$create->name.''.$create->email.''.$create->phone_number.''.$create->date_of_birth.''.$create->course_id.''.$create->admission_year,public_path('public/Image/'.$create->student_id.'.png'));   
+                    ->generate(''.$create->student_id.''.$create->name.''.$create->email.''.$create->phone_number.''.$create->course_id.''.$create->admission_year,public_path('public/Image/'.$create->name.'.png')); 
+//                   get the image name
+        $cr=$create->name.'.png';
         //dd($create);         
         Student::query()->where('id',$id->id)->update([
-            'student_id'=>$student_id,
-            'qrcode'=>$qrcode
+           
+            'qrcode'=>$cr
         ]);
         //dd($request);    
         return redirect()->route('students.index')->with('success','Student added successfully');
