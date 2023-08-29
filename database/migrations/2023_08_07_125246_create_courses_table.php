@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('short_name');
             $table->string('number');
             $table->string('description');
+            $table->string('fee_total');
             $table->string('duration');
             $table->string('department_id');
             $table->string('category_id');
