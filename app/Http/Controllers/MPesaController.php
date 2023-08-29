@@ -44,22 +44,22 @@ class MpesaController extends Controller
 
         if ($response->success) {
             Mpesa::query()->create([
-                            'user_id' =>$this->user->id,
-                            'course_id' =>$this->course->id,
-                            'student_id' =>$this->course->student_id, 
-                            'reference_number' =>$response->data->ReferenceNumber,
-                            'phone_number' => $this->student->phone_number,
-                            'amount' => ceil($this->course->amount),
-                            'description'=>'Payments for Course'. $this->course->title,
-                            'attempts' => 1,
-                            'is_initiated' => true,
-                            'queued_at' => now()
+                'user_id' =>$this->user->id,
+                'course_id' =>$this->course->id,
+                'student_id' =>$this->course->student_id, 
+                'reference_number' =>$response->data->ReferenceNumber,
+                'phone_number' => $this->student->phone_number,
+                'amount' => ceil($this->course->amount),
+                'description'=>'Payments for Course'. $this->course->title,
+                'attempts' => 1,
+                'is_initiated' => true,
+                'queued_at' => now()
             ]);
             Note::createSystemNotification(User::class, 'course', ' course Successfully Enrolled and awaiting for payments');
             $this->emit('noteAdded');
             $this->alert('success', 'Check Your Phone Number and Allow for Payment ');
             $this->reset();
-            return redirect()->route('user.list_courses');
+            return redirect()->route('courses.index');
 
         }
         else{
@@ -68,7 +68,7 @@ class MpesaController extends Controller
     }
     public function cancelled()
     {
-        $this->alert('error', 'You have canceled.');
+        $this->alert('error', 'You have cancelled.');
     }
     /**
      * Lipa na M-PESA password
@@ -99,36 +99,36 @@ class MpesaController extends Controller
                     'transaction_number' => $response->MpesaReceiptNumber,
                 ],                                         [
                     'user_id' => $Mpesa->user_id,
-                    'client_id'=>$Mpesa->client_id,
+                    'student_id'=>$Mpesa->student_id,
                     'transaction_type' => 'Order Payment',
                     'reference_number' => $Mpesa->reference_number,
                     'amount' => $response->Amount,
                     'description' => $Mpesa->course_id . ' course payment.',
                     'is_debit' => true
                 ]);
-                $wallet = Account::query()->where('client_id', $Mpesa->cliend_id)->first()->balance;
+                $wallet = Account::query()->where('student_id', $Mpesa->student_id)->first()->balance;
                 $balance = $wallet + $Mpesa->amount;
-                $wallet = Account::where('client_id', $Mpesa->cliend_id)->update(['balance' => $balance, 'available' => $balance]);
+                $wallet = Account::where('student_id', $Mpesa->student_id)->update(['balance' => $balance, 'available' => $balance]);
                 // grand Access to enrolledments statements
                 Enroll::query()
                     ->create(
                         [
                             'course_id' => $Mpesa->course_id,
                             'user_id' => $Mpesa->user_id,
-                            'client_id' =>$Mpesa->client_id, 
+                            'student_id' =>$Mpesa->student_id, 
                         ]
                     );
                 // send notifications here 
                 dispatch((new MailJob(
-                    "Client" . " " . User::query()->where('id', $Mpesa->user_id)->first()->name,
+                    "Student" . " " . User::query()->where('id', $Mpesa->user_id)->first()->name,
                     User::query()->where('id', $Mpesa->user_id)->first()->email,
                     'Congratulatiuons!! You have been enroll a course',
                     'course. #' . Course::query()->where('id',  $Mpesa->course_id)->first()->title . ' has been assigned to you Thank you for using our service',
                     true,
-                    route('user.list_enroll_courses'),
+                    route('courses.show, $course->id'),
                     '<<< Visit here for more details >>>'
                 )))->onQueue('emails')->delay(2);
-                return redirect()->route('user.list_enroll_courses');
+                return redirect()->route('courses.show, $course->id');
             } else {
                 // sync mpesa here
                 $Mpesa->update([
