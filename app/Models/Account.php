@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
-    protected $fillable=['student_id','amount_paid'];
+    protected $fillable=['amount'];
 
     /**
      * Student
@@ -19,5 +19,13 @@ class Account extends Model
     public function student(): HasMany
     {
         return $this->hasMany(Student::class);
+    }
+    /**
+     * Transaction
+     * @return HasMany
+     */
+    public function transaction(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

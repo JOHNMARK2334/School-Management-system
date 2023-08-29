@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    protected $fillable = ['course_id','name','short_name','number','description','duration','department_id','category_id','is_active'];
+    protected $fillable = ['course_id','name','short_name','number','description','fee_total','duration','department_id','category_id','is_active'];
 
     /**
      * department

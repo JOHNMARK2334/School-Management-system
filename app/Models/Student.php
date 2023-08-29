@@ -28,4 +28,12 @@ class Student extends Model
     {
         return $this->hasOne(Account::class);
     }
+    /**
+     * Transaction
+     * @return HasMany
+     */
+    public function transaction(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

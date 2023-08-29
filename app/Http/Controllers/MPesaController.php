@@ -10,6 +10,13 @@ use App\Models\Account;
 use App\Models\Revenue;
 use App\Models\Course;
 use App\Models\Student;
+use PAM\API\B2C;
+use PAM\API\PayLoad;
+use PAM\API\RegC2bUrl;
+use PAM\API\ShortCode;
+use PAM\API\App;
+use PAM\API\STKPush;
+use PAM\API\Balance;
 use Note\Models\Notification;
 use App\Http\Controllers\SystemController;
 use LaravelMultipleGuards\Traits\FindGuard;
@@ -39,9 +46,9 @@ class MpesaController extends Controller
             Mpesa::query()->create([
                             'user_id' =>$this->user->id,
                             'course_id' =>$this->course->id,
-                            'client_id' =>$this->course->client_id, 
+                            'student_id' =>$this->course->student_id, 
                             'reference_number' =>$response->data->ReferenceNumber,
-                            'phone_number' => $this->phone,
+                            'phone_number' => $this->student->phone_number,
                             'amount' => ceil($this->course->amount),
                             'description'=>'Payments for Course'. $this->course->title,
                             'attempts' => 1,
