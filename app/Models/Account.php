@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
-    protected $fillable=['amount'];
+    protected $fillable=['transaction_id','amount'];
 
     /**
      * Student
