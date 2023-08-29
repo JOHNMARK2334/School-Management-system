@@ -144,7 +144,7 @@
               <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://github.com/JOHNMARK2334">Online Builder</a>
             </li>
             <li class="mt-2">
-              <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+              <a class="github-button" href="https://github.com/JOHNMARK2334/School-Management-system" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star JOHNMARK2334/school-management-system on GitHub">Star</a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -315,11 +315,9 @@
                     <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; {{$students->name}}</li>
                     <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Registration number:</strong> &nbsp; {{$students->student_id}}</li>
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; {{$students->phone_number}}</li>
-                    <div class="pull-right">
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{$students->email}}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Date of birth:</strong> &nbsp; {{$students->date_of_birth}}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Admission year:</strong> &nbsp; {{$students->admission_year}}</li>
-                    </div>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{$students->email}}</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Date of birth:</strong> &nbsp; {{$students->date_of_birth}}</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Admission year:</strong> &nbsp; {{$students->admission_year}}</li>
                     <li class="list-group-item border-0 ps-0 pb-0">
                       <strong class="text-dark text-sm">Social:</strong> &nbsp;
                       <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
@@ -333,6 +331,12 @@
                       </a>
                     </li>
                   </ul>
+                </div>
+                <div class="card-body p-3">
+                  <p class="text-md">
+                    Student QR
+                  </p>
+                  <img src="{{asset ('public/Image/' .$students->qrcode) }}" class="rounded" height="120px" width="120px" alt="students qr-code"/>
                 </div>
               </div>
             </div>

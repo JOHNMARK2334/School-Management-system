@@ -141,10 +141,10 @@
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-material-dashboard">Online Builder</a>
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://github.com/JOHNMARK2334/School-Management-system">Online Builder</a>
             </li>
             <li class="mt-2">
-              <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+              <a class="github-button" href="https://github.com/JOHNMARK2334/School-Management-system" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star JOHNMARK2334/school-management-system on GitHub">Star</a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -284,7 +284,6 @@
                         <a href="{{route('students.edit',$student->id) }}" class="btn btn-info">Edit</a>
                         <a href ="{{ route('students.delete',$student->id) }}" class="btn btn-warning">Delete</a>
                       </td>
-                      <td>{{$student->qrcode}}</td>
                     </tr>
                     @endforeach
                   </tbody>
