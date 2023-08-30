@@ -50,7 +50,9 @@ class RoleController extends Controller
             "description" =>  $request->description,
             "department_id" => $request -> department_id,
         ]);
-        notify()->success(__('Role has been added successfully.'));
+        //notification
+        $rol_add= 'Role has been added successfully.';
+        notify()->success(__($rol_add));
         return redirect()->route('roles.index');
     }
 
@@ -90,7 +92,8 @@ class RoleController extends Controller
             'description'=> $request->description,
             'department_id'=>$request->department_id
         ]);
-        notify()->success(__('Role has been updated successfully.'));
+        $rol_update=$request->name. 'has been updated successfully.';
+        notify()->success(__($rol_update));
         return redirect()->route('roles.index');
     }
 
@@ -100,7 +103,8 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role = Role::query()->where('id',$role->id)->update(['is_active' => false]);
-        notify()->success(__('Role has been deleted successfully.'));
+        $rol_delete= 'Role has been deleted successfully.';
+        notify()->success(__($rol_delete));
         return back();
     }
 }

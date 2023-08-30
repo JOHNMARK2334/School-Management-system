@@ -51,7 +51,9 @@ class DepartmentController extends Controller
             "department_head"=> $request->department_head,
             "description" => $request->description
         ]);
-        notify()->success(__('Department has been added successfully.'));
+        //notification
+        $dep_add= 'Department has been added successfully.';
+        notify()->success(__($dep_add));
         return redirect()->route('departments.index');
     }
 
@@ -91,7 +93,8 @@ class DepartmentController extends Controller
         if ($department)
         {
             session(['success'=>'updated']);
-            notify()->success(__('Department has been updated successfully.'));
+            $dep_update= $request->name.'has been updated successfully.';
+            notify()->success(__($dep_update));
             return redirect()->route('departments.index');
         }
         else
@@ -108,7 +111,8 @@ class DepartmentController extends Controller
     {
         //dd($department);
         $department = Department::query()->where('id' ,$department->id)->update(['is_active'=> false]);
-        notify()->success(__('Department has been deleted successfully.'));
+        $dep_delete='Department has been deleted successfully.';
+        notify()->success(__($dep_delete));
         return back();
     }
 }

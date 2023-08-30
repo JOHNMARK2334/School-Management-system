@@ -38,7 +38,9 @@ class CategoryController extends Controller
             "name"  =>$request-> name,
             "description" => $request -> description
         ]);
-        notify()->success(__('Category has been added successfully.'));
+        //notfication
+        $cat_add= 'Category has been added successfully.';
+        notify()->success(__($cat_add));
         return redirect()->route('categories.index');
     }
 
@@ -74,7 +76,9 @@ class CategoryController extends Controller
             'name'=>$request->name,
             'description'=> $request->description,
         ]);
-        notify()->success(__('Category has been updated successfully.'));
+        //notification
+        $cat_update=$request->name.'has been updated successfully.';
+        notify()->success(__($cat_update));
         return redirect()->route('categories.index');
     }
 
@@ -84,7 +88,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category = Category::query()->where('id',$category->id)->update(['is_active'=>false]);
-        notify()->success(__('Category has been deleted successfully.'));
+        $cat_delete= 'Category has been deleted successfully.';
+        notify()->success(__($cat_delete));
         return back();
     }
 }

@@ -81,8 +81,9 @@ class StudentController extends Controller
            
             'qrcode'=>$cr
         ]);
-        //dd($request);  
-        notify()->success(__('Student has been added successfully.'));  
+        //dd($request); 
+        $stud_add= 'Student has been added successfully.'; 
+        notify()->success(__($stud_add));  
         return redirect()->route('students.index');
     }
     /**
@@ -140,7 +141,8 @@ class StudentController extends Controller
             'course_id'=>$request->course_id,
             'admission_year'=>$request->admission_year
         ]);
-        notify()->success(__('Student details have been updated successfully.'));
+        $stud_update= $request->name. 's details have been updated successfully.';
+        notify()->success(__($stud_update));
         return redirect()->route('students.index');
     }
 
@@ -150,7 +152,9 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student = Student::query()->where('id',$student->id)->update(['is_active'=> false]);
-        notify()->success(__('Student has been deleted successfully.'));
+
+        $stud_delete= 'Student has been deleted successfully.';
+        notify()->success(__($stud_delete));
         return back();
     }
 }
