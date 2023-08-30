@@ -5,7 +5,7 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+      <a class="navbar-brand m-0" href="{{ route('pages.dashboard') }}">
         <img src="{{ asset('assets\img\logo.png') }}" class="navbar-brand-img h-100 image-rounded" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Wasoko University</span>
       </a>
@@ -17,7 +17,7 @@
             <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Home</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="../pages/dashboard.html">
+          <a class="nav-link text-white active bg-gradient-primary" href="{{ route('pages.dashboard') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -28,7 +28,7 @@
         <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Elements</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{ route('departments.index') }}">
+          <a class="nav-link text-white " href="{{ route('departments.index') }}" target="">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -144,7 +144,7 @@
               <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://github.com/JOHNMARK2334/School-Management-system.git">Online Builder</a>
             </li>
             <li class="mt-2">
-              <a class="github-button" href="https://github.com/JOHNMARK2334/School-Management-system.git" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+              <a class="github-button" href="https://github.com/JOHNMARK2334/School-Management-system.git" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star JOHNMARK2334/School-Management-system on GitHub">Star</a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">

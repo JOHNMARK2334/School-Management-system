@@ -139,7 +139,7 @@
               <div class="card-body">
                     <div class="container fluid">
                         Edit category details:
-                        <form action="{{ route('categories.update') }}" method="POST" role="form" class="text-start" enctype="multipart/form-data">
+                        <form action="{{ route('categories.update') }}" method="POST" class="text-start" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">

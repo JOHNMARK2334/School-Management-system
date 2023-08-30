@@ -68,12 +68,12 @@ class CategoryController extends Controller
             'name' => 'required',
             'description' => 'required',
         ]);
-        //dd("update");
-        Category::query()->where('id',$request->id)-update([
-            "name"=>$request->name,
-            "description"=> $request->description,
+        //dd($request);
+        Category::query()->where('id',$request->id)->update([
+            'name'=>$request->name,
+            'description'=> $request->description,
         ]);
-        return redirect()->route('categories.index')->with('success category updated successfully');
+        return redirect()->route('categories.index')->with('success', 'category updated successfully');
     }
 
     /**
