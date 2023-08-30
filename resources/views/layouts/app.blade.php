@@ -26,7 +26,8 @@
     <link href="{{ asset('assets/css/material-dashboard.min.css')  }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/nucleo-icons.css')  }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/nucleo-svg.css')  }}" rel="stylesheet"/>
-
+    <!-- Laravel Notify -->
+    @notifyCss
     <!--Random Scripts-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Font Awesome Icons -->
@@ -35,7 +36,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-
+    
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -48,6 +49,9 @@
             @yield('content')
         </main>
     </div>
+     <!-- Laravel Notify -->
+     @include('notify::components.notify')
+    @notifyJs
 </body>
     <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/popper.min.js')  }}"></script>

@@ -68,7 +68,9 @@ class CourseController extends Controller
             "department_id"=>$request->department_id,
             "category_id"=>$request->category_id
         ]);
-        return redirect()->route('courses.index')->with('success','course created successfully');
+        //notification
+        notify()->success(__('Course has been added successfully.'));
+        return redirect()->route('courses.index');
     }
     /**
      * Display the specified resource.
@@ -113,7 +115,9 @@ class CourseController extends Controller
             'department_id'=>$request->department_id,
             'category_id'=>$request->category_id
         ]); 
-        return redirect()->route('courses.index')->with('success','course details updated successfully');
+        //notification
+        notify()->success(__('Course has been updated successfully.'));
+        return redirect()->route('courses.index');
     }
 
     /**

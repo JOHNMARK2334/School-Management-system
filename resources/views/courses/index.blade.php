@@ -5,8 +5,8 @@
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="{{ asset('assets/img/logo_.png') }}" class="navbar-brand-img h-100" alt="main_logo">
+      <a class="navbar-brand m-0" href="{{ route('pages.dashboard') }}">
+        <img src="{{ asset('assets/img/logo.png') }}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Wasoko University</span>
       </a>
     </div>
@@ -141,10 +141,10 @@
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://github.com/JOHNMARK2334/School-Management-system.git">Online Builder</a>
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://github.com/JOHNMARK2334">Online Builder</a>
             </li>
             <li class="mt-2">
-              <a class="github-button" href="https://github.com/JOHNMARK2334/School-Management-system.git" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+              <a class="github-button" href="https://github.com/JOHNMARK2334/School-Management-system.git" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star JOHNMARK2334/School-Management-system on GitHub">Star</a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -244,6 +244,7 @@
       </div>
     </nav>
     <!-- End Navbar -->
+    <br><br>
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
@@ -258,10 +259,10 @@
             </div>
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
+                <table class="table align-items-center mb-0 table-bordered">
                   <thead>
                     <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>  
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Course code</th>  
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"> Short Name</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Number</th>
@@ -306,23 +307,23 @@
                   document.write(new Date().getFullYear())
                 </script>,
                 made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                <a href="https://github.com/JOHNMARK2334" class="font-weight-bold" target="_blank">JOHNMARK</a>
                 for a better web.
               </div>
             </div>
             <div class="col-lg-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                  <a href="https://github.com/JOHNMARK2334" class="nav-link text-muted" target="_blank">Creative Tim</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                  <a href="https://github.com/JOHNMARK2334" class="nav-link text-muted" target="_blank">About Us</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                  <a href="https://github.com/JOHNMARK2334" class="nav-link text-muted" target="_blank">Blog</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                  <a href="https://github.com/JOHNMARK2334" class="nav-link pe-0 text-muted" target="_blank">License</a>
                 </li>
               </ul>
             </div>
