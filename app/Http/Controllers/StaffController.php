@@ -76,7 +76,8 @@ class StaffController extends Controller
             "department_id"=>1,
             "role_id" =>1
         ]);
-        return redirect()->route('staff.index')->with('success','staff added successfully');
+        notify()->success(__('Staff has been added successfully.'));
+        return redirect()->route('staff.index');
     }
     /**
      * Display the specified resource.
@@ -125,7 +126,8 @@ class StaffController extends Controller
             'phone_number'=>$request-> phone_number,
             'address'=>$request-> address
         ]);
-        return redirect()->route('staff.index')->with('success','staff details successfully updated');
+        notify()->success(__('Staff details have been updated successfully.'));
+        return redirect()->route('staff.index');
     }
     /**
      * Remove the specified resource from storage.
@@ -133,6 +135,7 @@ class StaffController extends Controller
     public function destroy(Staff $staff)
     {
         $staff = Staff::query()->where('id',$staff->id)->update(['is_active'=>false]);
+        notify()->success(__('Staff has been deleted successfully.'));
         return back();
     }
 }

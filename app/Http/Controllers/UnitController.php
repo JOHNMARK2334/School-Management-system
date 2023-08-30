@@ -50,7 +50,8 @@ class UnitController extends Controller
             "year"=> $request->year ,
             "semester"=>  $request->semester
         ]);
-        return redirect()->route('units.index')->with('success','unit added successfully');
+        notify()->success(__('Unit has been added successfully.'));
+        return redirect()->route('units.index');
     }
 
     /**
@@ -91,7 +92,8 @@ class UnitController extends Controller
             "year"=> $request->year ,
             "semester"=>  $request->semester
         ]);
-        return redirect()->route('units.index')->with('success','unit details updated successfully');
+        notify()->success(__('Unit has been updated successfully.'));
+        return redirect()->route('units.index');
     }
 
     /**
@@ -100,6 +102,7 @@ class UnitController extends Controller
     public function destroy(Unit $unit)
     {
         $unit = Unit::query()->where('id',$unit->id)->update(['is_active'=>false]);
+        notify()->success(__('Unit has been deleted successfully.'));
         return back();
     }
 }

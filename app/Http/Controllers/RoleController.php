@@ -50,7 +50,8 @@ class RoleController extends Controller
             "description" =>  $request->description,
             "department_id" => $request -> department_id,
         ]);
-        return redirect()->route('roles.index')->with('success','role created successfully');
+        notify()->success(__('Role has been added successfully.'));
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -89,7 +90,8 @@ class RoleController extends Controller
             'description'=> $request->description,
             'department_id'=>$request->department_id
         ]);
-        return redirect()->route('roles.index')->with('success','role details updated successfully');
+        notify()->success(__('Role has been updated successfully.'));
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -98,6 +100,7 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role = Role::query()->where('id',$role->id)->update(['is_active' => false]);
+        notify()->success(__('Role has been deleted successfully.'));
         return back();
     }
 }

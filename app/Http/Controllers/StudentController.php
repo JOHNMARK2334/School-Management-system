@@ -81,8 +81,9 @@ class StudentController extends Controller
            
             'qrcode'=>$cr
         ]);
-        //dd($request);    
-        return redirect()->route('students.index')->with('success','Student added successfully');
+        //dd($request);  
+        notify()->success(__('Student has been added successfully.'));  
+        return redirect()->route('students.index');
     }
     /**
      * Display the specified resource.
@@ -139,7 +140,8 @@ class StudentController extends Controller
             'course_id'=>$request->course_id,
             'admission_year'=>$request->admission_year
         ]);
-        return redirect()->route('students.index')->with('success','Student details updated successfully');
+        notify()->success(__('Student details have been updated successfully.'));
+        return redirect()->route('students.index');
     }
 
     /**
@@ -148,6 +150,7 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student = Student::query()->where('id',$student->id)->update(['is_active'=> false]);
+        notify()->success(__('Student has been deleted successfully.'));
         return back();
     }
 }

@@ -51,7 +51,8 @@ class DepartmentController extends Controller
             "department_head"=> $request->department_head,
             "description" => $request->description
         ]);
-        return redirect()->route('departments.index')->with('success','department added successfully');
+        notify()->success(__('Department has been added successfully.'));
+        return redirect()->route('departments.index');
     }
 
     /**
@@ -90,6 +91,7 @@ class DepartmentController extends Controller
         if ($department)
         {
             session(['success'=>'updated']);
+            notify()->success(__('Department has been updated successfully.'));
             return redirect()->route('departments.index');
         }
         else
@@ -106,6 +108,7 @@ class DepartmentController extends Controller
     {
         //dd($department);
         $department = Department::query()->where('id' ,$department->id)->update(['is_active'=> false]);
+        notify()->success(__('Department has been deleted successfully.'));
         return back();
     }
 }
