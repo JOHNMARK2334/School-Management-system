@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -41,6 +42,10 @@ class CategoryController extends Controller
         //notfication
         $cat_add= 'Category has been added successfully.';
         notify()->success(__($cat_add));
+        $create= Notification::create([
+            "message"=>$cat_add,
+            "category_id"=>$request->id
+        ]);
         return redirect()->route('categories.index');
     }
 
@@ -79,6 +84,10 @@ class CategoryController extends Controller
         //notification
         $cat_update=$request->name.'has been updated successfully.';
         notify()->success(__($cat_update));
+        $create= Notification::create([
+            "message"=>$cat_update,
+            "category_id"=>$category_id
+        ]);
         return redirect()->route('categories.index');
     }
 
@@ -90,6 +99,10 @@ class CategoryController extends Controller
         $category = Category::query()->where('id',$category->id)->update(['is_active'=>false]);
         $cat_delete= 'Category has been deleted successfully.';
         notify()->success(__($cat_delete));
+        $create= Notification::create([
+            "message"=>$cat_delete,
+            "category_id"=>$category,
+        ]);
         return back();
     }
 }

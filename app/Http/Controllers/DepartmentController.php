@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Role;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -54,6 +55,10 @@ class DepartmentController extends Controller
         //notification
         $dep_add= 'Department has been added successfully.';
         notify()->success(__($dep_add));
+        $create= Notification::create([
+            "message"=>$dep_add,
+            "department_id"=>$request->id
+        ]);
         return redirect()->route('departments.index');
     }
 
@@ -95,6 +100,10 @@ class DepartmentController extends Controller
             session(['success'=>'updated']);
             $dep_update= $request->name.'has been updated successfully.';
             notify()->success(__($dep_update));
+            $create= Notification::create([
+                "message"=>$dep_update,
+                "department_id"=>$request->id
+            ]);
             return redirect()->route('departments.index');
         }
         else
@@ -113,6 +122,10 @@ class DepartmentController extends Controller
         $department = Department::query()->where('id' ,$department->id)->update(['is_active'=> false]);
         $dep_delete='Department has been deleted successfully.';
         notify()->success(__($dep_delete));
+        $create= Notification::create([
+            "message"=>$dep_delete,
+            "department_id"=>$department
+        ]);
         return back();
     }
 }

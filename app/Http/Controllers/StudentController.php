@@ -6,6 +6,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Student;
 use App\Http\Controllers\QrCodeController;
 use App\Models\Course;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Carbon;
 class StudentController extends Controller
@@ -83,7 +84,11 @@ class StudentController extends Controller
         ]);
         //dd($request); 
         $stud_add= 'Student has been added successfully.'; 
-        notify()->success(__($stud_add));  
+        notify()->success(__($stud_add)); 
+        $create= Notification::create([
+            "message"=>$stud_add_add,
+            "student_id"=>$request->id
+        ]); 
         return redirect()->route('students.index');
     }
     /**
@@ -143,6 +148,10 @@ class StudentController extends Controller
         ]);
         $stud_update= $request->name. 's details have been updated successfully.';
         notify()->success(__($stud_update));
+        $create= Notification::create([
+            "message"=>$stud_update,
+            "student_id"=>$request->id
+        ]);
         return redirect()->route('students.index');
     }
 
@@ -155,6 +164,10 @@ class StudentController extends Controller
 
         $stud_delete= 'Student has been deleted successfully.';
         notify()->success(__($stud_delete));
+        $create= Notification::create([
+            "message"=>$stud_delete,
+            "student_id"=>$student
+        ]);
         return back();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Course;
 use App\Models\Unit;
+use App\Models\Notification;
 use App\Models\Department;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -71,6 +72,10 @@ class CourseController extends Controller
         //notification
         $cse_add= 'Course has been added successfully.';
         notify()->success(__($cse_add));
+        $create= Notification::create([
+            "message"=>$cse_add,
+            "course_id"=>$request->id
+        ]);
         return redirect()->route('courses.index');
     }
     /**
@@ -119,6 +124,10 @@ class CourseController extends Controller
         //notification
         $cse_update=$request->name. 'has been updated successfully.';
         notify()->success(__($cse_update));
+        $create= Notification::create([
+            "message"=>$cse_update,
+            "course_id"=>$request->id
+        ]);
         return redirect()->route('courses.index');
     }
 
@@ -130,6 +139,10 @@ class CourseController extends Controller
         $course = Course::query()->where('id', $course->id)->update(['is_active'=>false]);
         $cse_delete='Course has been deleted successfully.';
         notify()->error(__($cse_delete));
+        $create= Notification::create([
+            "message"=>$cse_delete,
+            "course_id"=>$course
+        ]);
         return back() ;
     }
 }

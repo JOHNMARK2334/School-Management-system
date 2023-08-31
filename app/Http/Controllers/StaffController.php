@@ -5,6 +5,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Staff;
 use App\Models\Role;
 use App\Models\Department;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -79,6 +80,10 @@ class StaffController extends Controller
         //notification
         $staff_add= 'Staff has been added successfully.';
         notify()->success(__($staff_add));
+        $create= Notification::create([
+            "message"=>$staff_add,
+            "staff_id"=>$request->id
+        ]);
         return redirect()->route('staff.index');
     }
     /**
@@ -130,6 +135,10 @@ class StaffController extends Controller
         ]);
         $staff_update= $request->name.'s details have been updated successfully.';
         notify()->success(__($staff_update));
+        $create= Notification::create([
+            "message"=>$staff_update,
+            "staff_id"=>$request->id
+        ]);
         return redirect()->route('staff.index');
     }
     /**
@@ -140,6 +149,10 @@ class StaffController extends Controller
         $staff = Staff::query()->where('id',$staff->id)->update(['is_active'=>false]);
         $staff_delete= 'Staff has been deleted successfully.';
         notify()->success(__($staff_delete));
+        $create= Notification::create([
+            "message"=>$staff_delete,
+            "staff_id"=>$staff
+        ]);
         return back();
     }
 }

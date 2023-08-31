@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Role;
 use App\Models\Staff;
+use App\Models\Notification;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,10 @@ class RoleController extends Controller
         //notification
         $rol_add= 'Role has been added successfully.';
         notify()->success(__($rol_add));
+        $create= Notification::create([
+            "message"=>$rol_add,
+            "role_id"=>$request->id
+        ]);
         return redirect()->route('roles.index');
     }
 
@@ -94,6 +99,10 @@ class RoleController extends Controller
         ]);
         $rol_update=$request->name. 'has been updated successfully.';
         notify()->success(__($rol_update));
+        $create= Notification::create([
+            "message"=>$rol_update,
+            "role_id"=>$request->id
+        ]);
         return redirect()->route('roles.index');
     }
 
@@ -105,6 +114,10 @@ class RoleController extends Controller
         $role = Role::query()->where('id',$role->id)->update(['is_active' => false]);
         $rol_delete= 'Role has been deleted successfully.';
         notify()->success(__($rol_delete));
+        $create= Notification::create([
+            "message"=>$rol_delete,
+            "role_id"=>$role
+        ]);
         return back();
     }
 }

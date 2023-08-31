@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Unit;
 use App\Models\Course;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -50,7 +51,12 @@ class UnitController extends Controller
             "year"=> $request->year ,
             "semester"=>  $request->semester
         ]);
-        notify()->success(__('Unit has been added successfully.'));
+        $unit_add= 'Unit has been added successfully.';
+        notify()->success(__($unit_add));
+        $create= Notification::create([
+            "message"=>$unit_add,
+            "unit_id"=>$request->id
+        ]);
         return redirect()->route('units.index');
     }
 
@@ -92,7 +98,12 @@ class UnitController extends Controller
             "year"=> $request->year ,
             "semester"=>  $request->semester
         ]);
-        notify()->success(__('Unit has been updated successfully.'));
+        $unit_update='Unit has been updated successfully.';
+        notify()->success(__($unit_update));
+        $create= Notification::create([
+            "message"=>$unit_update,
+            "unit_id"=>$request->id
+        ]);
         return redirect()->route('units.index');
     }
 
@@ -102,7 +113,12 @@ class UnitController extends Controller
     public function destroy(Unit $unit)
     {
         $unit = Unit::query()->where('id',$unit->id)->update(['is_active'=>false]);
-        notify()->success(__('Unit has been deleted successfully.'));
+        $unit_delete= 'Unit has been deleted successfully.';
+        notify()->success(__($unit_delete));
+        $create= Notification::create([
+            "message"=>$unit_delete,
+            "unit_id"=>$unit
+        ]);
         return back();
     }
 }
