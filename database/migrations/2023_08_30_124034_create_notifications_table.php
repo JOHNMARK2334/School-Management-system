@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('transaction_id')->nullable();
             $table->string('unit_id')->nullable();
             $table->string('user_id')->nullable();
-            $table->timestamp('created_at');
+            $table->timestamps();
         });
     }
 
