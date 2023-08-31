@@ -51,7 +51,6 @@ class Controller extends BaseController
         $staff = Staff::get();
         $student = Student::query()->where('admission_year', 2023)->get();
         return view('pages.dashboard',compact('students','staff','student','departments','categories','chart'));
-        return view('pages.dashboard');
     }
 
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\Controller;
 
@@ -108,3 +109,5 @@ Route::get('/', 'DepartmentController@index'); // localhost:8000/
 Route::post('/getEmployees/{id}',[StaffController::class,'getEmployees'])->name('get.roles');
 Route::get('/generate-qrcode', [QrCodeController::class, 'index'])->name('qrCode');
 
+//notification
+Route::get('/notifications',[NotificationController::class, 'index'])->name('pages.notifications');
