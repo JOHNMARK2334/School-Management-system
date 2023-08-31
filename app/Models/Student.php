@@ -36,4 +36,12 @@ class Student extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+     /**
+     * Notification
+     * @return HasMany
+     */
+    public function notification(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

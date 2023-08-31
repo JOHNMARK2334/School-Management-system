@@ -19,4 +19,12 @@ class Unit extends Model
     {
         return $this->belongsTo(Course::class);
     }
+     /**
+     * Notification
+     * @return HasMany
+     */
+    public function notification(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

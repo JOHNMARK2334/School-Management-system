@@ -29,5 +29,13 @@ class Department extends Model
     {
         return $this->hasMany(Course::class);
     }
+     /**
+     * Notification
+     * @return HasMany
+     */
+    public function notification(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
     
 }

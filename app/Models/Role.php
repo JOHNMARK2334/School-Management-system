@@ -28,4 +28,12 @@ class Role extends Model
     {
         return $this->belongsTo(Department::class);
     }
+     /**
+     * Notification
+     * @return HasMany
+     */
+    public function notification(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

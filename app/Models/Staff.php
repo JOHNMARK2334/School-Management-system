@@ -28,4 +28,12 @@ class Staff extends Model
     {
         return $this->hasOne(Role::class);
     }
+     /**
+     * Notification
+     * @return HasMany
+     */
+    public function notification(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

@@ -28,4 +28,12 @@ class Transaction extends Model
     {
         return $this->belongsTo(Account::class);
     }
+     /**
+     * Notification
+     * @return HasMany
+     */
+    public function notification(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

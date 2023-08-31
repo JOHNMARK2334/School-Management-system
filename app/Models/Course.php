@@ -48,5 +48,12 @@ class Course extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    
+     /**
+     * Notification
+     * @return HasMany
+     */
+    public function notification(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
