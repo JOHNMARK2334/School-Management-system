@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     use HasFactory;
-    protected $fillable=['message','account_id','category_id','course_id','mpesa_id','role_id','staff_id','student_id','transaction_id'];
+    protected $fillable=['message','account_id','category_id','course_id','mpesa_id','role_id','staff_id','student_id','transaction_id','unit_id','user_id'];
     /**
      * Account
      * @return BelongsTo
